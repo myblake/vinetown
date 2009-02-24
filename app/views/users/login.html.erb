@@ -1,0 +1,13 @@
+<h1>Log In</h1>
+<div>
+<% if flash[:wrong_password] %>
+	<p style="color: green;"><%= flash[:password] %></p>
+<% end %>
+
+<% form_for :user, @user, :url => {:controller => :users, :action => :login_backend} do |f| %>
+	username:<br /><%= f.text_field(:username)%> <br/ >
+	password:<br /><%= f.password_field(:password) %><br />
+<%= submit_tag "login" %>
+<% end %>
+don't have an account? <%= link_to "signup", :controller => "users", :action => "signup" %>
+</div>

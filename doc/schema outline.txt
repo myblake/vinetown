@@ -1,0 +1,43 @@
+vinetown basic schema v 0.1 2/17/09
+
+table users
+t.string first_name
+t.string last_name
+t.string email
+t.string picture_file (not quite sure how to do media yet)
+t.integer usertype_id
+t.string status
+t.integer age
+t.string hometown
+t.string gender
+t.string favorite_wine
+
+
+assumably down the line lots of other minutia (favorite wine, hometown, age, etc etc. as well as settings for display)
+
+(admin etc.)
+table usertype
+t.string name
+
+
+table friends
+t.integer user_id
+t.integer user_id
+t.boolean initiated_by_col0, default => true
+t.status (pending, approved, declined)
+(note look up self joins in rails. index on both columns)
+
+table message
+t.integer user_id #from
+t.integer user_id #to
+t.string subject
+t.text message
+t.timestamp sent_at
+
+table groups
+
+table comments
+
+table posts
+
+assumably something for media management

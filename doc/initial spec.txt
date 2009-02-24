@@ -1,0 +1,47 @@
+
+
+                        Social Networking Site Schematic
+
+This website will operate on four levels.
+
+   1. A standard web site with homepage, pages & links.
+   2. A user community that is open to all who are members
+   3. Neighborhoods where users interact with invited friends
+   4. Closed,back office function
+
+Technical needs include:
+
+   1. Standard web content and pictures
+   2. Ad space: banner and side ads, pages, links etc
+   3. Capacity for live webinars & video uploads form both the site manager and users
+   4. Archive for video, photos and stories
+   5. Social networking capacity
+
+    * Video sharing
+
+    * Chat room
+    * Short profile url "http://domain.com/username".
+    * Friend approval system so that members can approve friend requests prior to activation.
+    * Support for user-selected backgrounds and colors for public profiles.
+    * MP3 accessiblityfor profiles
+    * Site-wide commenting system including:
+          o User status
+          o Community Forums
+          o Auto-Clubs
+          o Auto-Email
+          o Friends Photos
+          o Gallery for Community Videos and Photos
+          o Ability to tag site content,
+          o post stories, videos and links
+
+   6. Back office function
+
+    * Site tracking: stats on hits per page as well as ability to record advertising clicks
+    * Paypal
+    * Site manager email
+
+Matt's Thoughts:
+Chat room accomplished through comments instead. Maybe reddit still news board that focuses on wine.
+Support for user selected colors and backgrounds for personal page is a bad idea. Facebook vs. Myspace, 'nuf said.
+Clubs isn't a bad idea, though perhaps either instead or in addition too we want to through up pages for different regions and types of wine.
+Carol wants this to be media rich, how do I accomplish this (hint, talk to kb)

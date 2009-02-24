@@ -1,0 +1,19 @@
+<h1>Sign Up</h1>
+<div>
+<% form_for :user, @user, :url => {:action => :signup_backend} do |f| %>
+    <%= f.error_messages %>
+	<%= f.label :username %><br />
+	<%= f.text_field :username %><br />
+	<%= f.label :password %><br />
+	<%= f.password_field :password %><br />
+	Confirm Password<br />
+	<%= f.password_field :password_confirm %><br />
+	<%= f.label :email %><br />
+	<%= f.text_field :email %><br />
+	First Name<br />
+	<%= f.text_field :first_name %><br />
+	Last Name<br />
+	<%= f.text_field :last_name %><br />
+	<%= f.submit "Sign up" %>
+<% end %>
+</div>
