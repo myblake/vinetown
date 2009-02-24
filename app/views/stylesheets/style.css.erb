@@ -55,7 +55,7 @@ a:hover { color: <%= @color["othercolor"] %> ; }
   margin-bottom: 0;
   padding: 5px;
 }
-
+	            </div>
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
@@ -74,7 +74,7 @@ td {padding:2px 2px 2px 10px;}
 #footer{height:60px;background-color:<%= @color["purple"] %>; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
 #login_box{text-align:right;}
 #logo {text-align:center;}
-
+#pageback {background:<%=@color["pageback"]%>;}
 #nav{height:40px;background-color:; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: bottom;}
 #nav a{ font-size:18px; color: <%= @color["lightgreen"] %>;	height:50px;}
 #nav a:hover{color:<%= @color["darkgreen"] %>;background-color:<%= @color["violet"]%>;}
@@ -116,5 +116,8 @@ td {padding:2px 2px 2px 10px;}
 .zebra{background-color:<%= @color["lightgreen"] %>;}
 .formtable{color:<%= @color["lightgreen"] %>;font-weight:bold;}
 .bar{height:30px;background-color:<%= @color["purple"]%>;}
+.profile_picture{border:2px solid <%= @color["purple"]%>;}
+.noedit{background-color:white; padding:2px; width:98.5%; border-right:4px solid <%= @color["violet"]%> }
+
 .box a{padding:10px; background-color:#fff;margin:5px;line-height:4em;border:2px #fff solid;}
 .box a:hover{border:2px <%= @color["darkgreen"] %> solid; background-image:url(../images/line.png);background-repeat:repeat-x;}

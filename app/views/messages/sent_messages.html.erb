@@ -1,0 +1,24 @@
+<h1>Sent Messages</h1>
+<div class="colorback">
+	<%= render :partial => "partials/messages_links.html.erb" %>
+	<table class="formtable">
+		<tr>
+			<th>To</th>
+			<th>Subject</th>
+			<th>Sent</th>
+		</tr>
+	<% for message in @messages %>
+	<tr>
+		<td>
+			<%= link_to User.find(message.receiver_user_id).first_name + User.find(message.receiver_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.receiver_user_id } %>
+		</td>
+		<td>
+			<%= link_to message.subject, :action => :read_message, :params => { :id => message.id } %>
+		</td>
+		<td>
+			<%= message.created_at %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+</div>

@@ -1,0 +1,43 @@
+<h1><%= @user.first_name + @user.last_name %></h1>
+<% if @user.id == session[:user_id] %>
+<%= link_to "View", :action => :profile, :params => { :id => session[:user_id]}%>
+<% end %>
+<div class="colorback">
+	<%= image_tag "cup.png", :class => "profile_picture"%>
+<table class="formtable">
+	<% form_for :user, @user, :url => {:action => :profile} do |f| %>
+		<tr><td><%= f.error_messages %></td></tr>
+		<tr>
+			<td>
+				Username<br />
+				<div class="noedit"><%= @user.username %></div>
+			</td>
+			<td>
+				<%= f.label :email %><br />
+				<%= f.text_field :email %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				New Password<br />
+			    <input id="user_password" name="user[password]" size="30" type="password" value="" />
+			</td>
+			<td>
+				Confirm New Password<br />
+			    <input id="user_password_confirm" name="user[password_confirm]" size="30" type="password" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				First Name<br />
+				<%= f.text_field :first_name %>
+			</td>
+			<td>
+				Last Name<br />
+				<%= f.text_field :last_name %>
+			</td>
+		</tr>
+		<tr><td><%= f.submit "Save changes" %><br /></td></tr>
+	<% end %>
+</table>
+</div>

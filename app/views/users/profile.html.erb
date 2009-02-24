@@ -1,0 +1,29 @@
+<h1><%= @user.first_name + @user.last_name %></h1>
+<% if @user.id == session[:user_id] %>
+<%= link_to "Edit", :action => :edit_profile%>
+<% end %>
+<div class="colorback">
+	<%= image_tag "cup.png", :class => "profile_picture"%>
+<table class="formtable">
+	<tr>
+		<td>
+			Username<br />
+			<%= @user.username %>
+		</td>
+		<td>
+			Email<br />
+			<%= @user.email %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			First Name<br />
+			<%= @user.first_name %>
+		</td>
+		<td>
+			Last Name<br />
+			<%= @user.last_name %>
+		</td>
+	</tr>
+</table>
+</div>

@@ -10,29 +10,34 @@
     </head>
     <body>
         <div id="page">
-            <div id="header">
-		        <div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>	              
-                <div id="nav">
-						<ul>                        
-                        	<li><%= link_to ("About", :controller => "home", :action => "about")%></li>
-							<% if session[:user_id] && User.find(session[:user_id]).admin %>
-							<li><%= link_to ("Admin", :controller => "admin", :action => "index")%></li>
-							<% end %>
-						</ul>
-						<div class="bar"></div>
-                </div>
-				<div id="login_box">
-                    <% if session[:user_id] %>
-						Signed in as <%= session[:user_username] %>. <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;
-					<% end %>
-                </div>
-            </div>
-            <div id="main">
-                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br><br><% end %>
-                <%= yield %>
-            </div>
-            <div id="footer"><br />
-                copyright &copy; 2009 vinetown llc.</a>
+			<div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>
+            	<div id="pageback">
+				<div id="header">
+		        	              
+                	<div id="nav">
+							<ul>
+								<li><%= link_to ("Messages", :controller => "messages", :action => "inbox")%></li>                        
+								<li><%= link_to ("My Profile", :controller => "users", :action => "profile", :params => { :id => session[:user_id]})%></li>                        
+	                        	<li><%= link_to ("About", :controller => "home", :action => "about")%></li>
+								<% if session[:user_id] && User.find(session[:user_id]).admin %>
+								<li><%= link_to ("Admin", :controller => "admin", :action => "index")%></li>
+								<% end %>
+							</ul>
+							<div class="bar"></div>
+	                </div>
+					<div id="login_box">
+	                    <% if session[:user_id] %>
+							Signed in as <%= session[:user_username] %>. <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;
+						<% end %>
+	                </div>
+	            </div>
+	            <div id="main">
+	                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br><br><% end %>
+	                <%= yield %>
+	            </div>
+	            <div id="footer"><br />
+	                copyright &copy; 2009 vinetown llc.</a>
+	            </div>
             </div>
         </div>
     </body>

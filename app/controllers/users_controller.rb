@@ -57,4 +57,31 @@ class UsersController < ApplicationController
   def index
   end
   
+  def profile
+    @user = User.find(params[:id])
+  end
+
+  def edit_profile
+    @user = User.find(session[:user_id])
+    if params[:user]
+      @user.email = params[:user][:email];
+     
+      if params[:user][:password] != ""      
+        if params[:user][:password] != params[:user][:password_confirm]
+    	    flash[:error] = "Passwords don't match"
+    			redirect_to :action => :edit
+          return
+    		end
+    	  @user.password = Digest::SHA1.hexdigest(params[:user][:password])
+    	end
+      if @user.save
+        flash[:notice] = "Your settings are updated!"
+        redirect_to :action => :profile
+      else
+        redirect_to :action => :edit
+      end               
+    end
+  end
+  
+  
 end

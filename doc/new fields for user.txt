@@ -1,0 +1,15 @@
+Name
+Email address
+Date of Birth
+Sex
+State
+Country
+Status
+
+OPTIONAL:
+Interests:
+Types of Wine
+Favorite Wines
+Food & Wine Pairings
+Wine Education
+Wine & Entertainment
