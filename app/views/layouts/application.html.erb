@@ -11,8 +11,15 @@
     <body>
         <div id="page">
             <div id="header">
+		        <div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>	              
                 <div id="nav">
-		                <div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>	              
+						<ul>                        
+                        	<li><%= link_to ("About", :controller => "home", :action => "about")%></li>
+							<% if session[:user_id] && User.find(session[:user_id]).admin %>
+							<li><%= link_to ("Admin", :controller => "admin", :action => "index")%></li>
+							<% end %>
+						</ul>
+						<div class="bar"></div>
                 </div>
 				<div id="login_box">
                     <% if session[:user_id] %>

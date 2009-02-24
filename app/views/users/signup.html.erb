@@ -1,19 +1,39 @@
 <h1>Sign Up</h1>
-<div>
+<div class="colorback">
+<table class="formtable">
 <% form_for :user, @user, :url => {:action => :signup_backend} do |f| %>
-    <%= f.error_messages %>
-	<%= f.label :username %><br />
-	<%= f.text_field :username %><br />
-	<%= f.label :password %><br />
-	<%= f.password_field :password %><br />
-	Confirm Password<br />
-	<%= f.password_field :password_confirm %><br />
-	<%= f.label :email %><br />
-	<%= f.text_field :email %><br />
-	First Name<br />
-	<%= f.text_field :first_name %><br />
-	Last Name<br />
-	<%= f.text_field :last_name %><br />
-	<%= f.submit "Sign up" %>
+	<tr><td><%= f.error_messages %></td></tr>
+	<tr>
+		<td>
+			<%= f.label :username %><br />
+			<%= f.text_field :username %>
+		</td>
+		<td>
+			<%= f.label :email %><br />
+			<%= f.text_field :email %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
+		</td>
+		<td>
+			Confirm Password<br />
+			<%= f.password_field :password_confirm %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			First Name<br />
+			<%= f.text_field :first_name %>
+		</td>
+		<td>
+			Last Name<br />
+			<%= f.text_field :last_name %>
+		</td>
+	</tr>
+	<tr><td><%= f.submit "Sign up" %><br /></td></tr>
 <% end %>
+</table>
 </div>
