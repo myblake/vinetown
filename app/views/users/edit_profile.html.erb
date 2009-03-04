@@ -1,12 +1,13 @@
-<h1><%= @user.first_name + @user.last_name %></h1>
+<h1><%= @user.first_name + " " + @user.last_name %></h1>
 <% if @user.id == session[:user_id] %>
-<%= link_to "View", :action => :profile, :params => { :id => session[:user_id]}%>
+<%= link_to "View", :action => :profile, :params => { :id => session[:user_id] }%>
 <% end %>
 <div class="colorback">
 	<%= image_tag "cup.png", :class => "profile_picture"%>
 <table class="formtable">
-	<% form_for :user, @user, :url => {:action => :profile} do |f| %>
-		<tr><td><%= f.error_messages %></td></tr>
+	<% form_for :user, @user do |f| %>
+		<tr><td><% if flash[:error] %><p class="flash notice"><%= flash[:error] %></p><br /><% end %>
+        </td></tr>
 		<tr>
 			<td>
 				Username<br />

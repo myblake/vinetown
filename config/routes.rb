@@ -43,5 +43,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   
   # default route
-  map.root :controller => "users"
+  map.root :controller => "home"
 end

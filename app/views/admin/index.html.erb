@@ -1,1 +1,48 @@
-hello
+<% @count = 0 %>
+<% @title_text="Admin - Users"%>
+<h1>Users <span class="teal">Profile</span></h1>
+<div class="blueback">
+
+<h3>Number of Users:</h3>
+<%= @size %>
+<h3>Users Active Today</h3>
+<%= @active_users_today%>
+<h3>Growth Overall:</h3>	
+<div class="chart"><img  src="<%= users_chart_url %>" /></div>
+<div class="clearer"><br /></div>
+<h3>Growth Today:</h3>
+<div class="chart"><img  src="<%= users_hours_chart_url %>" /></div>
+
+
+<div class="clearer"><br /></div>
+</div>
+
+<h1>User <span class="teal">Profiles</span></h1>
+<div class="blueback">
+
+	
+<table>
+  <tr>
+    <th>Username</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>DOB</th>
+	<th>Last Login</th>
+  </tr>
+
+<% for user in @users %>
+<% @count+=1 %>
+<% if @count%2 == 0 %>
+  <tr>
+<% else %>
+  <tr class="zebra">
+<% end %>
+    <td><%= link_to h(user.username), :action => "edit", :params => { :id => user.id }   %></td>
+    <td><%=h user.first_name %></td>
+    <td><%=h user.last_name %></td>
+    <td><%=h user.date_of_birth %></td>
+	<td><%= user.last_login_at ? user.last_login_at.strftime("%a, %m/%d/%y %I:%M%p") : "" %></td>
+  </tr>
+<% end %>
+</table>
+</div>

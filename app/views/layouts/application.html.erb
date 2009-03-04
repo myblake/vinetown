@@ -16,12 +16,19 @@
 		        	              
                 	<div id="nav">
 							<ul>
-								<li><%= link_to ("Messages", :controller => "messages", :action => "inbox")%></li>                        
-								<li><%= link_to ("My Profile", :controller => "users", :action => "profile", :params => { :id => session[:user_id]})%></li>                        
-	                        	<li><%= link_to ("About", :controller => "home", :action => "about")%></li>
-								<% if session[:user_id] && User.find(session[:user_id]).admin %>
-								<li><%= link_to ("Admin", :controller => "admin", :action => "index")%></li>
+								<% if session[:user_id] %>
+								<li><%= link_to ("Messages", :controller => :messages, :action => :inbox)%></li>                        
+								<li><%= link_to ("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
+                        		<li><%= link_to ("Friends", :controller => :friends, :action => :index)%></li>                    
+								<% else %>
+								<li><%= link_to "Login", :controller => :users, :action => :login %>
+								<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>
 								<% end %>
+	                        	<li><%= link_to ("About", :controller => :home, :action => :about)%></li>
+								<% if session[:user_id] && User.find(session[:user_id]).admin %>
+								<li><%= link_to ("Admin", :controller => :admin, :action => :index)%></li>
+								<% end %>
+								
 							</ul>
 							<div class="bar"></div>
 	                </div>
@@ -32,7 +39,8 @@
 	                </div>
 	            </div>
 	            <div id="main">
-	                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br><br><% end %>
+	                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br /><% end %>
+					<% if @mb_errors %><p class="flash notice"><%= @mb_errors%></p><br /><% end %>
 	                <%= yield %>
 	            </div>
 	            <div id="footer"><br />

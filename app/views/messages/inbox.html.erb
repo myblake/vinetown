@@ -10,13 +10,13 @@
 	<% for message in @messages %>
 	<tr>
 		<td>
-			<%= link_to User.find(message.sender_user_id).first_name + User.find(message.sender_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.sender_user_id } %>
+			<%= link_to User.find(message.sender_user_id).first_name + " " + User.find(message.sender_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.sender_user_id } %>
 		</td>
 		<td>
 			<%= link_to message.subject, :action => :read_message, :params => { :id => message.id } %>
 		</td>
 		<td>
-			<%= message.created_at %>
+			<%= message.created_at.strftime("%m/%d/%y %I:%M%p") %>
 		</td>
 	</tr>
 	<% end %>
