@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:login, :signup, :signup_backend, :login_backend]
+  before_filter :authorize, :except => [:login, :signup, :signup_backend, :login_backend, :forgot_password, :create_forgot_password, :confirm]
 
   def signup
     if session[:user_id]
@@ -17,7 +17,9 @@ class UsersController < ApplicationController
 		                :password => sha_passwd,
 		                :first_name => params[:user][:first_name],
 		                :last_name => params[:user][:last_name],
-		                :last_login_at => Time.now)
+		                :last_login_at => Time.now,
+		                :confirmation => Digest::SHA1.hexdigest(params[:user][:username] + Time.now.to_s),
+		                :confirmed => false)
 	  if params[:user][:password] != params[:user][:password_confirm]
 	    flash[:notice] = "Passwords don't match."
 			redirect_to :action => :signup
@@ -91,6 +93,56 @@ class UsersController < ApplicationController
         redirect_to :action => :edit_profile
       end               
     end
+  end
+  
+  def create_welcome
+    user = User.find(session[:user_id])
+    email = UserMailer.create_welcome(user)
+    render(:text => "<pre>" + email.encoded + "</pre>")
+  end
+  
+  def forgot_password
+    
+  end
+  
+  def create_forgot_password
+    if session[:user_id]
+      redirect_to :action => :index
+      return
+    end
+    user = User.find(:first, :conditions => ["username=?", params[:user][:username]])
+    if user
+      password = Digest::SHA1.hexdigest(Time.now.to_s).to_s[0..7]
+  	  sha_passwd = Digest::SHA1.hexdigest(password) 
+  	  user.password = sha_passwd
+  	  user.save
+      email = UserMailer.create_forgot_password(user, password)
+      render(:text => "<pre>" + email.encoded + "</pre>")
+    else
+      flash[:error] = "Could not find user #{params[:username]}"
+      redirect_to :action => :index
+      return
+    end
+  end
+  
+  # confirms user, link is emailed to user to confirm validity and ownership of email address
+  # may want to change where we redirect to
+  def confirm
+    @user = User.find(:first, :conditions => ["confirmation=?", params[:a]])
+    unless @user 
+      flash[:error] = "Invalid User Confirmation link"
+      redirect_to :action => :index
+      return
+    end
+    if @user.confirmed
+      flash[:notice] = "User was previously confirmed"
+      redirect_to :action => :index
+      return
+    end
+    @user.confirmed = true
+    @user.save
+    flash[:notice] = "User confirmed"
+    redirect_to :action => :index
   end
   
 end

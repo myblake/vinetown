@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def about
     @about = AboutUs.find(:first)
+    if @about.nil?
+      @about = AboutUs.new(:text=>"Please edit")
+      @about.save
+    end
   end
   
   def index

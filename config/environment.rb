@@ -58,7 +58,17 @@ Rails::Initializer.run do |config|
     :session_key => '_vinetown_session',
     :secret      => '12176e28bbc7ab8bea711624e551910d2bba6a04ff65ebacf9f910cceae4392d96e9b76758b0e6a777de313c08c2a3b224ed2f02b619b1a7caf3cded281cfdec'
   }
-
+  
+  config.action_mailer.delivery_method = :smtp 
+  config.action_mailer.smtp_settings = {
+    :address      => "smtp.gmail.com",
+    :port         => 993,
+    :domain       => "vinetown.com",
+    :authentication => :login,
+    :user_name => "myblake@gmail.com",
+    :password => "xilop@WS"  
+  }
+  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")

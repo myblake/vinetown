@@ -26,7 +26,7 @@ class FriendsController < ApplicationController
     @friend.save
     if params[:redirect] = "index"
       flash[:notice] = "Your have requested to become friends with #{@user.username}"
-      redirect_to :controller => "users", :action => "public_profiles"
+      redirect_to :controller => :users, :action => :index
       return
     end
   end

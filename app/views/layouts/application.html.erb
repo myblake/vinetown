@@ -6,11 +6,13 @@
         <title>Vinetown.com</title>
 		<link rel="icon" type="image/png" href="/images/favicon.png"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-    	<%= stylesheet_link_tag 'style' %>    	
+    	<%= stylesheet_link_tag "style" %>
+		<%= javascript_include_tag "jquery" %>
     </head>
     <body>
         <div id="page">
 			<div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>
+				<h2 style="text-align:center;margin-top:0;"><em>Because wine is fun!</em></h2><br />
             	<div id="pageback">
 				<div id="header">
 		        	              
@@ -35,7 +37,10 @@
 					<div id="login_box">
 	                    <% if session[:user_id] %>
 							Signed in as <%= session[:user_username] %>. <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;
-						<% end %>
+						<% end %><br />
+						<%= if pending 
+							link_to "Pending friend request", :controller => :friends, :action => :index
+						   end %>
 	                </div>
 	            </div>
 	            <div id="main">

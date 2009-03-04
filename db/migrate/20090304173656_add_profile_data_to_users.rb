@@ -13,6 +13,8 @@ class AddProfileDataToUsers < ActiveRecord::Migration
     add_column :users, :favorite_food_and_wine_pairings, :text
     add_column :users, :wine_and_entertainment, :text
     add_column :users, :wine_and_education, :text
+    add_column :users, :confirmation, :string
+    add_column :users, :confirmed, :boolean
   end
 
   def self.down
@@ -29,5 +31,7 @@ class AddProfileDataToUsers < ActiveRecord::Migration
     remove_column :users, :favorite_food_and_wine_pairings
     remove_column :users, :wine_and_entertainment
     remove_column :users, :wine_and_education
+    remove_column :users, :confirmation
+    remove_column :users, :confirmed
   end
 end

@@ -1,0 +1,9 @@
+Dear <%= @user.first_name %>, 
+
+Thank you for your signing up with Vinetown. 
+
+To confirm your account please click the following link:
+
+<%= link_to "Confirm User Account", :controller => :users, :action => :confirm, :a =>  @user.confirmation %>
+
+The Vinetown Team
