@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Vinetown.com</title>
+		<link rel="icon" type="image/png" href="/images/favicon.png"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    	<%= stylesheet_link_tag "style" %>
+		<%= javascript_include_tag "jquery" %>
+    </head>
+    <body>
+        <div id="page">
+			<div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>
+				<h2 class="headline"><em>Because wine is fun!</em></h2><br />
+            	<div id="pageback">
+				<div id="header">
+		        	              
+                	<div id="nav" class="nav">
+							<ul>
+								<% if session[:user_id] %>
+								<li><%= link_to ("Messages", :controller => :messages, :action => :inbox)%></li>                        
+								<li><%= link_to ("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
+                        		<li><%= link_to ("Friends", :controller => :friends, :action => :index)%></li>                    
+								<% else %>
+								<li><%= link_to "Login", :controller => :users, :action => :login %>
+								<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>
+								<% end %>
+	                        	<li><%= link_to ("About", :controller => :home, :action => :about)%></li>
+								<% if session[:user_id] && User.find(session[:user_id]).admin %>
+								<li><%= link_to ("Admin", :controller => :admin, :action => :index)%></li>
+								<% end %>
+								
+							</ul>
+							<div class="bar"></div>
+	                </div>
+					<div id="login_box">
+	                    <% if session[:user_id] %>
+							Signed in as <%= session[:user_email] %> <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;
+						<% end %><br />
+						<%= if pending 
+							link_to "Pending friend request", :controller => :friends, :action => :index
+						   end %>
+	                </div>
+	            </div>
+	            <div id="main">
+	                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br /><% end %>
+					<% if @mb_errors %><p class="flash notice"><%= @mb_errors%></p><br /><% end %>
+	                <%= yield %>
+	            </div>
+	            <div id="footer"><br />
+	                copyright &copy; 2009 vinetown llc.</a>
+	            </div>
+            </div>
+        </div>
+    </body>
+</html>

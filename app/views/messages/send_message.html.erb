@@ -1,0 +1,28 @@
+<h1>Send Message</h1>
+<%= render :partial => "partials/messages_links.html.erb" %>
+<div class="colorback">
+	<table class="formtable">
+	<% form_for :message, @message, :url => {:action => :send_message_backend} do |f| %>
+		<tr><td><%= f.error_messages %></td></tr>
+		<tr>
+			<td>
+				To:<br />
+				<%= f.text_field :receiver_username, :value => @value %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= f.label :subject %><br />
+				<%= f.text_field :subject %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= f.label :message %><br />
+				<%= f.text_area :message %>
+			</td>
+		</tr>
+		<tr><td><%= f.submit "Send" %><br /></td></tr>
+	<% end %>
+	</table>
+</div>

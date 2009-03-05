@@ -1,0 +1,14 @@
+<h1>Log In</h1>
+<div class="colorback formtable">
+<% if flash[:wrong_password] %>
+	<p style="color: green;"><%= flash[:password] %></p>
+<% end %>
+
+<% form_for :user, @user, :url => {:controller => :users, :action => :login_backend} do |f| %>
+	email:<br /><%= f.text_field(:email)%> <br/ >
+	password:<br /><%= f.password_field(:password) %><br />
+<%= submit_tag "login" %>
+<% end %>
+don't have an account? <%= link_to "signup", :controller => :users, :action => :signup %><br />
+forgot your password? <%= link_to "Click here", :controller => :users, :action => :forgot_password %>
+</div>

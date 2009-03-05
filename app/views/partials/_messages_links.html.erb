@@ -1,0 +1,12 @@
+<div id="subnav" class="nav bar">
+	<%	#put some js checks in here to verify that nothing has changed on this page (prolly onchange for all elements activates
+		#some state var which is checked onclick for these links)
+	%>
+	<ul>
+		<li><%= link_to "Inbox", :action => :inbox %></li>
+		<li><%= link_to "Send Message", :action => :send_message %></li>
+		<li><%= link_to "Sent Message", :action => :sent_messages %></li>
+	</ul>
+</div>
+
+

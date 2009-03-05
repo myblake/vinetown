@@ -1,0 +1,57 @@
+<% @title_text="Friends"%>
+<% @count = 0 %>
+<% unless @friend_requests.empty? %>
+	<h1>Friend Requests</h1>
+	<div class="blueback">
+	<table>
+	  <tr>
+	    <th>Username</th>
+	    <th>First</th>
+	    <th>Last<th>
+	    <th><th>
+	  </tr>
+		<% for user in @friend_requests %>
+			<% @count+=1 %>
+			<% if @count%2 == 0 %>
+			  <tr>
+			<% else %>
+			  <tr class="zebra">
+			<% end %>
+		    <td><%= link_to User.find(message.sender_user_id).first_name + " " + User.find(message.sender_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.sender_user_id } %></td>
+		    <td><%=h user.first_name %></td>
+		    <td><%=h user.last_name %></td>
+			<td><%= link_to "Accept", :action => "accept_friend", :params => {:user_id => user.id }%></td>
+			<td><%= link_to "Reject", :action => "reject_friend", :params => {:user_id => user.id }%></td>
+		  </tr>
+		<% end %>
+	</table>
+	</div>	
+<% end %>
+<h1>Your <span class="teal">Friends</span></h1>
+<div class="blueback">
+<% if @friends.empty? %>
+	<!-- if no friends -->
+	<div class="box"><%= link_to "Go and make some!", :controller => "users", :action => "public_profiles" %></div>
+<% else %>
+	<table>
+	  <tr>
+	    <th>Username</th>
+	    <th>First</th>
+	    <th>Last<th>
+	  </tr>
+
+	<% for user in @friends %>
+		<% @count+=1 %>
+		<% if @count%2 == 0 %>
+		  <tr>
+		<% else %>
+		  <tr class="zebra">
+		<% end %>
+		<td><%= link_to user.first_name + " " + user.last_name, :controller => :users, :action => :profile, :params => { :id => user.id } %></td>
+	    <td><%=h user.first_name %></td>
+	    <td><%=h user.last_name %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+</div>

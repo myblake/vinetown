@@ -1,0 +1,12 @@
+<table>
+<% form_for :about, @about, :url => {:action => :edit_about_us_backend} do |f| %>
+	<tr><td><%= f.error_messages %></td></tr>
+	<tr>
+		<td>
+			<%= f.label :text %><br />
+			<%= f.text_area :text %>
+		</td>
+	</tr>
+	<tr><td><%= f.submit "Done" %></tr></td>
+<% end %>
+</table>

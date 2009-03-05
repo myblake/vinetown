@@ -1,0 +1,9 @@
+<div id="subnav" class="nav bar">
+	<%	#put some js checks in here to verify that nothing has changed on this page (prolly onchange for all elements activates
+		#some state var which is checked onclick for these links)
+	%>
+	<ul>
+		<li><%= link_to "Account Information", :action => :edit_profile %></li>
+		<li><%= link_to "User Information", :action => :edit_profile_2 %></li>
+	</ul>
+</div>

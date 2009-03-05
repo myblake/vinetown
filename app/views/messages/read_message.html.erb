@@ -1,0 +1,28 @@
+<h1><%= @message.subject %></h1>
+<div class="colorback">
+	<%= render :partial => "partials/messages_links.html.erb" %>
+	<table class="formtable">
+		<tr>
+			<td>
+				From:<br />
+				<%= User.find(@message.sender_user_id).username %>
+			</td>
+
+			<td>
+				To:<br />
+				<%= User.find(@message.receiver_user_id).username %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Subject:<br />
+				<%= @message.subject %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= @message.message %>
+			</td>
+		</tr>
+	</table>
+</div>
