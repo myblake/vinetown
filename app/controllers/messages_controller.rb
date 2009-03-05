@@ -13,6 +13,11 @@ class MessagesController < ApplicationController
   
   def sent_messages
     @messages = Message.find(:all, :conditions => ["sender_user_id=?",session[:user_id]], :order => "created_at DESC")
+    @messages.each do |m|
+      if m.subject.nil?
+        m.subject = "(no subject)"
+      end
+    end
   end
   
   def send_message

@@ -1,8 +1,9 @@
 <h1><%= @user.first_name + " " + @user.last_name %></h1>
 <% if @user.id == session[:user_id] %>
-<%= link_to "View", :action => :profile, :params => { :id => session[:user_id] }%>
+<div class="box"><%= link_to "View", :action => :profile, :params => { :id => session[:user_id] }%></div>
 <% end %>
-<div class="colorback">
+<%= render :partial => "partials/profile_nav.html.erb" %>
+<div class="colorback">	
 	<%= image_tag "cup.png", :class => "profile_picture"%>
 <table class="formtable">
 	<% form_for :user, @user do |f| %>
@@ -10,12 +11,10 @@
         </td></tr>
 		<tr>
 			<td>
-				Username<br />
-				<div class="noedit"><%= @user.username %></div>
+				Email<br />
+				<div class="noedit"><%= @user.email %></div>
 			</td>
 			<td>
-				<%= f.label :email %><br />
-				<%= f.text_field :email %>
 			</td>
 		</tr>
 		<tr>

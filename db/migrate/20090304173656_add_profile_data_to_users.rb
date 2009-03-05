@@ -1,18 +1,15 @@
 class AddProfileDataToUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :last_login_at, :timestamp
-    add_column :users, :date_of_birth, :string
+    add_column :users, :date_of_birth, :timestamp
     add_column :users, :gender, :string
     add_column :users, :hometown, :string
     add_column :users, :state, :string
     add_column :users, :country, :string
     add_column :users, :status, :string
     add_column :users, :interests, :text
-    add_column :users, :favorite_type_of_wine, :string
     add_column :users, :favorite_wines, :text
     add_column :users, :favorite_food_and_wine_pairings, :text
-    add_column :users, :wine_and_entertainment, :text
-    add_column :users, :wine_and_education, :text
     add_column :users, :confirmation, :string
     add_column :users, :confirmed, :boolean
   end
@@ -26,11 +23,8 @@ class AddProfileDataToUsers < ActiveRecord::Migration
     remove_column :users, :country
     remove_column :users, :status
     remove_column :users, :interests
-    remove_column :users, :favorite_type_of_wine
     remove_column :users, :favorite_wines
     remove_column :users, :favorite_food_and_wine_pairings
-    remove_column :users, :wine_and_entertainment
-    remove_column :users, :wine_and_education
     remove_column :users, :confirmation
     remove_column :users, :confirmed
   end

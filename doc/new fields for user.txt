@@ -1,15 +1,22 @@
-Name
-Email address
-Date of Birth
-Sex
-State
-Country
-Status
+Email - Optional
+myblake@gmail.com
 
-OPTIONAL:
-Interests:
-Types of Wine
+Birthday
+11 / 22
+Hometown
+Belmont
+State
+MA
+Country
+USA
+
+Status
+Kicking ass and taking names
+
+Interests
+
 Favorite Wines
-Food & Wine Pairings
-Wine Education
-Wine & Entertainment
+
+Favorite Food and Wine Pairings
+
+Groups

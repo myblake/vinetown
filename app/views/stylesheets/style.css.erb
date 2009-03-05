@@ -1,3 +1,14 @@
+<%
+@color = Hash.new
+@color["green"]="#5B8727"
+@color["black"]="#000000"
+@color["gray"]="#AAAAAA"
+@color["darkgreen"]="#4A6D2C"
+@color["lightgreen"]="#9AD352"
+@color["champagne"]="#DED8B1"
+@color["greentext"]="#253A0B"
+%>
+
 h1 {
 	color: green;
 }
@@ -10,7 +21,7 @@ body { background-color: #fff; }
 
 body, p, ol, ul, td {
   font-family: arial, helvetica, sans-serif;
-  font-size:   13px;
+  font-size:   18px;
   line-height: 18px;
 }
 
@@ -20,10 +31,10 @@ pre {
   font-size: 11px;
 }
 
-a { color: <%= @color["darkgreen"] %>; text-decoration:none;  }
+a { color: <%= @color["green"] %>; text-decoration:none;  }
 a img {border:0;}
 
-a:hover { color: <%= @color["othercolor"] %> ; }
+a:hover { color: <%= @color["darkgreen"] %> ; }
 
 .fieldWithErrors {
   padding: 2px;
@@ -61,42 +72,42 @@ a:hover { color: <%= @color["othercolor"] %> ; }
   list-style: square;
 }
 
-h1 {border-bottom:3px <%= @color["violet"] %> solid; padding-bottom:10px;}
+h1 {border-bottom:3px <%= @color["gray"] %> solid; padding-bottom:10px;}
 h2 {line-height:0px;margin-top:30px;}
 table {width:;border-spacing:0;}
 th {text-align:left;}
 td {padding:2px 2px 2px 10px;}
 
 /* Main Page Divs*/
-#page{color:<%= @color["purple"] %>;width:80%;margin:auto;}
+#page{color:<%= @color["black"] %>;width:100%;margin:auto;}
 #header{text-align:center;}
-#main{width:860px;margin:auto;}
-#footer{height:60px;background-color:<%= @color["purple"] %>; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
+#main{width:85%;margin:auto;}
+#footer{height:60px;background-color:<%= @color["black"] %>; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
 #login_box{text-align:right;}
 #logo {text-align:center;}
 #pageback {background:<%=@color["champagne"]%>;}
-#nav{height:40px;background-color:; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: bottom;}
-#nav a{ font-size:18px; color: <%= @color["champagne"] %>;	height:50px;}
-#nav a:hover{color:<%= @color["greentext"] %>;background-color:<%= @color["violet"]%>;}
+#nav{height:40px; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: bottom; }
+#subnav{ border-bottom:10px <%= @color["darkgreen"] %> solid;}
 
-
-#nav ul {
+.nav a{ font-size:18px; color: <%= @color["champagne"] %>;	height:50px;}
+.nav a:hover{color:<%= @color["greentext"] %>;background-color:<%= @color["gray"]%>;}
+.nav ul{
 	float:left;
 	list-style-type:none;
 	margin:-10px 0 0 30px;
 	padding:0;
-	background:<%= @color["purple"] %>;
+	background:<%= @color["black"] %>;
 	position:relative;
 	top:10px;
 } 
 
-#nav ul li {
+.nav ul li {
 	margin-right: 10px;
 	float:left;
 	/*background:url(../images/nav_tab_left_g.gif) no-repeat;*/
 }
 
-#nav ul li a {
+.nav ul li a {
 	height:30px;
 	line-height: 30px;
 	padding-left: 10px;
@@ -107,17 +118,19 @@ td {padding:2px 2px 2px 10px;}
 
 /* Classes */
 
-.colorback {background-color:<%= @color["violet"] %>; padding:10px;}
-.teal {color:<%= @color["darkgreen"] %>;}
-.chart{padding:3px;border:3px <%= @color["purple"] %> solid; background:white;float:left;width:612px;margin-right:8px;}
+.colorback {background-color:<%= @color["gray"] %>; padding:10px;}
+.teal {}
+.chart{padding:3px;border:3px <%= @color["black"] %> solid; background:white;float:left;width:612px;margin-right:8px;}
 .clearer{clear:both;}
 .csssucks table{padding:0px;margin:0px;}
 .csssucks td{border:1px solid black;}
 .zebra{background-color:<%= @color["champagne"] %>;}
-.formtable{color:<%= @color["champagne"] %>;font-weight:bold;}
-.bar{height:30px;background-color:<%= @color["purple"]%>;}
-.profile_picture{border:2px solid <%= @color["purple"]%>;}
-.noedit{background-color:white; padding:2px; width:98.5%; border-right:4px solid <%= @color["violet"]%> }
-
+.formtable{color:<%= @color["black"] %>;font-weight:bold;}
+.bar{height:30px;background-color:<%= @color["black"]%>;}
+.profile_picture{border:2px solid <%= @color["black"]%>;}
+.noedit{background-color:white; padding:2px; width:98.5%; border-right:4px solid <%= @color["gray"]%> }
+.hundredpx {height:100px;}
+.highlight{color:<%=@color["green"]%>;}
+.headline{text-align:center;margin-top:0;color:<%=@color["black"]%>;}
 .box a{padding:10px; background-color:#fff;margin:5px;line-height:4em;border:2px #fff solid;}
 .box a:hover{border:2px <%= @color["darkgreen"] %> solid; background-image:url(../images/line.png);background-repeat:repeat-x;}

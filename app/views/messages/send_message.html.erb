@@ -1,6 +1,6 @@
 <h1>Send Message</h1>
+<%= render :partial => "partials/messages_links.html.erb" %>
 <div class="colorback">
-	<%= render :partial => "partials/messages_links.html.erb" %>
 	<table class="formtable">
 	<% form_for :message, @message, :url => {:action => :send_message_backend} do |f| %>
 		<tr><td><%= f.error_messages %></td></tr>

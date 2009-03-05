@@ -1,7 +1,7 @@
 <% @title_text="Friends"%>
 <% @count = 0 %>
 <% unless @friend_requests.empty? %>
-	<h1>Friend <span class="teal">Requests</span></h1>
+	<h1>Friend Requests</h1>
 	<div class="blueback">
 	<table>
 	  <tr>
@@ -17,7 +17,7 @@
 			<% else %>
 			  <tr class="zebra">
 			<% end %>
-		    <td><%=link_to user.username, :controller => "users", :action => "user", :params => { :username => user.username }  %></td>
+		    <td><%= link_to User.find(message.sender_user_id).first_name + " " + User.find(message.sender_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.sender_user_id } %></td>
 		    <td><%=h user.first_name %></td>
 		    <td><%=h user.last_name %></td>
 			<td><%= link_to "Accept", :action => "accept_friend", :params => {:user_id => user.id }%></td>
@@ -47,8 +47,7 @@
 		<% else %>
 		  <tr class="zebra">
 		<% end %>
-	    <td><%=link_to user.username, :controller => "users", :action => "user", :params => { :username => user.username }  %></td>
-		</td>
+		<td><%= link_to user.first_name + " " + user.last_name, :controller => :users, :action => :profile, :params => { :id => user.id } %></td>
 	    <td><%=h user.first_name %></td>
 	    <td><%=h user.last_name %></td>
 	  </tr>
