@@ -1,0 +1,9 @@
+table groups
+table comments
+table posts
+
+on users:
+search for users
+friend interface
+finish the sign up forms with new fields as well as edit and profile views
+forms for posts
