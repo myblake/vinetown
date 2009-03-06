@@ -5,12 +5,12 @@
 		<tr>
 			<td>
 				From:<br />
-				<%= User.find(@message.sender_user_id).username %>
+				<%= User.find(@message.sender_user_id).email %>
 			</td>
 
 			<td>
 				To:<br />
-				<%= User.find(@message.receiver_user_id).username %>
+				<%= User.find(@message.receiver_user_id).email %>
 			</td>
 		</tr>
 		<tr>

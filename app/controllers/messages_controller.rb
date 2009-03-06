@@ -21,14 +21,14 @@ class MessagesController < ApplicationController
   end
   
   def send_message
-    @value = params[:receiver_username]
+    @value = params[:receiver_email]
   end
   
   def send_message_backend
-    receiver = User.find(:first, :conditions => ["username=?",params[:message][:receiver_username]])
+    receiver = User.find(:first, :conditions => ["email=?",params[:message][:receiver_email]])
     
     if receiver.nil?
-      flash[:notice] = "Could not find user #{params[:message][:receiver_username]}."
+      flash[:notice] = "Could not find user #{params[:message][:receiver_email]}."
       redirect_to :action => :send_message
       return
     end
