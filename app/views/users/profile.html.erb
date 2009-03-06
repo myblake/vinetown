@@ -14,7 +14,9 @@
 	</tr>
 		<td>
 			<span class="highlight">Birthday</span><br />
-			<%=h( @user.date_of_birth.strftime("%B %d")) %>
+			<%= if @user.date_of_birth 
+				h( @user.date_of_birth.strftime("%B %d")) 
+			end %>
 		</td>
 	</tr>
 	<tr>
