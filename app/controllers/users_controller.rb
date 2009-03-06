@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 		                :first_name => params[:user][:first_name],
 		                :last_name => params[:user][:last_name],
 		                :confirmation => Digest::SHA1.hexdigest(params[:user][:email] + Time.now.to_s),
-		                :confirmed => false)
+		                :confirmed => true) #change to false after active mailer issues are worked out
 	  if params[:user][:password] != params[:user][:password_confirm]
 	    flash[:notice] = "Passwords don't match."
 			redirect_to :action => :signup
