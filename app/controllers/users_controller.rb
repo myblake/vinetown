@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:login, :signup, :signup_backend, :login_backend, :forgot_password, :create_welcome, :create_forgot_password, :confirm]
+  before_filter :authorize, :except => [:index, :login, :signup, :signup_backend, :login_backend, :forgot_password, :create_welcome, :create_forgot_password, :confirm]
 
   def signup
     if session[:user_id]
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
       redirect_to :action => :index
       return
     end
-    user = User.find(:first, :conditions => ["email=?", params[:email]])
+    user = User.find(:first, :conditions => ["email=?", params[:user][:email]])
     if user
       password = Digest::SHA1.hexdigest(Time.now.to_s).to_s[0..7]
   	  sha_passwd = Digest::SHA1.hexdigest(password) 

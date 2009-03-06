@@ -1,18 +1,18 @@
 class UserMailer < ActionMailer::Base
   
   def welcome(user)
-    subject    'UserMailer#welcome'
+    subject    'Welcome to Vinetown'
     recipients user.email 
-    from       'info@vinetown.com' 
+    from       'vinetown@vinetown.com' 
     sent_on    Time.now
     
     body       :user => user
   end
 
   def forgot_password(user, password)
-    subject    'UserMailer#forgot_password'
+    subject    'Your Vinetown Password'
     recipients user.email 
-    from       'info@vinetown.com'
+    from       'vinetown@vinetown.com'
     sent_on    Time.now
     
     body       :user => user, :password => password
