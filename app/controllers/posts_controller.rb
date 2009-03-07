@@ -19,10 +19,28 @@ class PostsController < ApplicationController
   end
 
   def comment
+    if params[:post]
+      @post_id = params[:post][:id]
+    end
+    if params[:comment][:text]
+      if params[:comment][:parent]
+        parent = params[:comment][:parent]  
+      else
+        parent = 'NULL'
+      end
+      @comment = Comment.new(:user_id => session[:user_id], :text => params[:comment][:text], :parent_id => parent, :post_id => params[:post][:id] )
+      unless @comment.save
+        flash[:error] = "Could not save comment"
+        return
+      end
+      redirect_to :action => :view, :params => { :id => @post_id }
+    end
   end
 
   def view
     @post = Post.find(params[:id])
+    @comments = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id")
+
   end
   
 end
