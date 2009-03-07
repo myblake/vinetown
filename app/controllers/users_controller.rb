@@ -24,8 +24,7 @@ class UsersController < ApplicationController
       return
 		end
 		if @user.save
-		  flash[:notice] = "Please check your email for a confirmation message."
-      redirect_to :action => :login
+      redirect_to :action => :create_welcome, :params => { :email => @user.email }
 		else
 			redirect_to :action => :signup
 		end
@@ -125,8 +124,12 @@ class UsersController < ApplicationController
   
   def create_welcome
     user = User.find(:first, :conditions => ["email=?", params[:email]])
-    email = UserMailer.create_welcome(user)
-    render(:text => "<pre>" + email.encoded + "</pre>")
+    if UserMailer.deliver_welcome(user)
+      flash[:notice] = "A confirmation issue has been sent to the address you provided."
+    else
+      flash[:notice] = "We have experienced an issue with our mail servers. Please contact vinetown@vinetown.com for more assistance."
+    end
+    redirect_to :action => :index
   end
   
   def forgot_password
@@ -144,13 +147,13 @@ class UsersController < ApplicationController
   	  sha_passwd = Digest::SHA1.hexdigest(password) 
   	  user.password = sha_passwd
   	  user.save
-      email = UserMailer.create_forgot_password(user, password)
-      render(:text => "<pre>" + email.encoded + "</pre>")
+      if UserMailer.deliver_forgot_password(user, password)
+        flash[:error] = "Please check your email for a new password."
+      end
     else
       flash[:error] = "Could not find user account for email address #{params[:email]}"
-      redirect_to :action => :index
-      return
     end
+    redirect_to :action => :index
   end
   
   # confirms user, link is emailed to user to confirm validity and ownership of email address

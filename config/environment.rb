@@ -9,6 +9,7 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+#require "smtp_tls"
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -34,7 +35,7 @@ Rails::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths += %W( #{RAILS_ROOT}/lib/stmp_tls.rb )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -59,16 +60,6 @@ Rails::Initializer.run do |config|
     :secret      => '12176e28bbc7ab8bea711624e551910d2bba6a04ff65ebacf9f910cceae4392d96e9b76758b0e6a777de313c08c2a3b224ed2f02b619b1a7caf3cded281cfdec'
   }
   
-  config.action_mailer.delivery_method = :smtp 
-  config.action_mailer.smtp_settings = {
-    :address      => "smtp.gmail.com",
-    :port         => 993,
-    :domain       => "vinetown.com",
-    :authentication => :login,
-    :user_name => "myblake@gmail.com",
-    :password => "xilop@WS"  
-  }
-  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
@@ -83,3 +74,17 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
+ActionMailer::Base.delivery_method = :smtp
+
+ActionMailer::Base.smtp_settings = {
+   :tls => true,
+   :address => "smtp.gmail.com",
+   :port => "587",
+   :domain => "mail.vinetown.com",
+   :authentication => :plain,
+   :user_name => "vinetown@vinetown.com",
+   :password => "twist2x2" 
+ }
+ 
+ActionMailer::Base.default_content_type = "text/html"

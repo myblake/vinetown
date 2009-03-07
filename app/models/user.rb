@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :messages
   has_many :friends
-  has_many :posts
+  has_many :posts, :foreign_key => "user_id"
   has_many :comments
   has_and_belongs_to_many :groups
 
