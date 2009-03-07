@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:index, :login, :signup, :signup_backend, :login_backend, :forgot_password, :create_welcome, :create_forgot_password, :confirm]
+  before_filter :authorize, :except => [:index, :login, :login_backend, :signup, :signup_backend, :forgot_password, :create_welcome, :create_forgot_password, :confirm]
 
   def signup
     if session[:user_id]
@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 		                :first_name => params[:user][:first_name],
 		                :last_name => params[:user][:last_name],
 		                :confirmation => Digest::SHA1.hexdigest(params[:user][:email] + Time.now.to_s),
-		                :confirmed => true) #change to false after active mailer issues are worked out
+		                :confirmed => false,
+		                :pw_reset => false)
 	  if params[:user][:password] != params[:user][:password_confirm]
 	    flash[:notice] = "Passwords don't match."
 			redirect_to :action => :signup
@@ -36,7 +37,6 @@ class UsersController < ApplicationController
     end
   end
   
-  
 	def login_backend
 		email = params[:user][:email]
 		password = Digest::SHA1.hexdigest(params[:user][:password])
@@ -46,17 +46,24 @@ class UsersController < ApplicationController
         flash[:notice] = "Please confirm your email address."
         redirect_to :action => :index
         return
-      end
+      end      
 			session[:user_id] = user.id
       session[:user_email] = user.email
       user.last_login_at = Time.now
       unless user.save
         #flash something on the backend maybe? this probably means a validation failed, why?
       end
+      if user.pw_reset
+        redirect_to :action => :password_reset
+        return
+      end
       redirect_to :controller => :users, :action => :index
-		  
 		else
-			flash[:notice] = "Incorrect email or password."
+			unless email=~/.*\@.*\..*/
+  			flash[:notice] = "Incorrect email or password. Your email address appears misformatted."
+			else
+			  flash[:notice] = "Incorrect email or password."
+		  end
 			redirect_to :controller => :users, :action => :login
 		end
 	end
@@ -78,13 +85,12 @@ class UsersController < ApplicationController
   def edit_profile
     @user = User.find(session[:user_id])
     if params[:user]
-      @user.email = params[:user][:email]
       @user.first_name = params[:user][:first_name]
       @user.last_name = params[:user][:last_name]
       
       if params[:user][:password] != ""      
         if params[:user][:password] != params[:user][:password_confirm]
-    	    flash[:error] = "Passwords don't match"
+    	    flash[:notice] = "Passwords don't match"
     			redirect_to :action => :edit_profile
           return
     		end
@@ -94,6 +100,7 @@ class UsersController < ApplicationController
         flash[:notice] = "Your settings are updated!"
         redirect_to :action => :profile, :params => {:id => session[:user_id]}
       else
+        flash[:notice] = "Error saving new settings."
         redirect_to :action => :edit_profile
       end               
     end
@@ -136,6 +143,24 @@ class UsersController < ApplicationController
     
   end
   
+  def password_reset
+    @user = User.find(session[:user_id])
+    if params[:user]
+      if params[:user][:password] != params[:user][:password_confirm]
+  	    flash[:notice] = "Passwords don't match"
+        return
+  		end
+  	  @user.password = Digest::SHA1.hexdigest(params[:user][:password])
+  	  @user.pw_reset = false
+  	  if @user.save
+        flash[:notice] = "Your settings are updated!"
+        redirect_to :controller => :users, :action => :index
+      else
+        flash[:notice] = "Error saving new settings."
+      end
+    end
+  end
+  
   def create_forgot_password
     if session[:user_id]
       redirect_to :action => :index
@@ -143,15 +168,21 @@ class UsersController < ApplicationController
     end
     user = User.find(:first, :conditions => ["email=?", params[:user][:email]])
     if user
+      if user.pw_reset
+        flash[:notice] = "Password has been recently reset, please check you inbox"
+        redirect_to :action => :login
+        return
+      end
       password = Digest::SHA1.hexdigest(Time.now.to_s).to_s[0..7]
   	  sha_passwd = Digest::SHA1.hexdigest(password) 
   	  user.password = sha_passwd
+  	  user.pw_reset = true
   	  user.save
       if UserMailer.deliver_forgot_password(user, password)
-        flash[:error] = "Please check your email for a new password."
+        flash[:notice] = "Please check your email for a new password."
       end
     else
-      flash[:error] = "Could not find user account for email address #{params[:email]}"
+      flash[:notice] = "Could not find user account for email address #{params[:email]}"
     end
     redirect_to :action => :index
   end
