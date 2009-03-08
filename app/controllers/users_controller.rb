@@ -79,7 +79,10 @@ class UsersController < ApplicationController
   end
   
   def profile
-    @user = User.find(params[:id])
+    unless @user = User.find(params[:id])
+      flash[:notice] = "Couldn't not find user"
+      redirect_to :action => :index
+    end
   end
 
   def edit_profile

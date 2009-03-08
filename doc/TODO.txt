@@ -1,7 +1,8 @@
 on users:
 search for users
-friend interface
+friend interface => better way to add friends, control who sees your profile etc.
 ajax status bar stuff
+
 
 build out:
 structure for where posts go
