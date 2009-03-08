@@ -40,7 +40,7 @@
     <td><%= link_to h(user.email), :action => "edit", :params => { :id => user.id }   %></td>
     <td><%=h user.first_name %></td>
     <td><%=h user.last_name %></td>
-    <td><%=h user.date_of_birth.strftime("%m/%d/%Y") %></td>
+    <td><% if user.date_of_birth %><%=h user.date_of_birth.strftime("%m/%d/%Y") %><% end %></td>
 	<td><%= user.last_login_at ? user.last_login_at.strftime("%a %m/%d/%y %I:%M%p") : "" %></td>
   </tr>
 <% end %>
