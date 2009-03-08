@@ -1,9 +1,9 @@
 <% for comment in @comments[object] %>
 	<%=comment.user.first_name + " " + comment.user.last_name%><br /></span>
-	<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
+	<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %><br />
 	<%= link_to "Reply", :action => :comment, :params => { :post => { :id => @post.id }, :comment => {:parent => comment.id }}%>
-	<br />	
-	<div class="comment"><%= h comment.text %></div> <br />
+	</span><br />	
+	<div class="commentdiv"><span class="comment"><%= h comment.text %></span></div> <br />
 	
 	<div class="indent"><%= render (:partial => "partials/comment.html.erb", :object => comment.id )%></div>
 	

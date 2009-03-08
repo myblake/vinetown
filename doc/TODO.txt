@@ -1,14 +1,12 @@
-table groups
-table comments
-table posts
-
-
 on users:
 search for users
 friend interface
-finish email stuff
+ajax status bar stuff
 
-build out 
-forms for posts/comments etc
+build out:
+structure for where posts go
+layer stuff
 
-logic for groups
+
+later:
+ajax comments

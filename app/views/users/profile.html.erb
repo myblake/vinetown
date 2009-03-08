@@ -1,10 +1,11 @@
 <h1 style="margin-bottom:0px"><%= @user.first_name + " " + @user.last_name %></h1>
 <span class="status"><%=h( @user.status )%></span>
 <% if @user.id == session[:user_id] %>
-<div class="box"><%= link_to "Edit", :action => :edit_profile%></div>
+<div class="box"><%= link_to "Edit My Profile", :action => :edit_profile%></div>
 <% end %>
 <div class="colorback">
-	<%= image_tag "cup.png", :class => "profile_picture"%>
+	<%= image_tag "cup.png", :class => "profile_picture"%><br />
+	&nbsp;
 <table class="formtable">
 	<tr>
 		<td>
@@ -60,6 +61,9 @@
 	<tr>
 		<td>
 			<span class="highlight">Groups</span><br />
+			<% for group in @user.groups%>
+			<%= h(group.name)%><% unless group == @user.groups.last %>,<%end%>
+			<% end %>
 		</td>
 	</tr>
 	

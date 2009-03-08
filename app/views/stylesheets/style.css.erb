@@ -2,12 +2,19 @@
 @color = Hash.new
 @color["green"]="#5B8727"
 @color["black"]="#000000"
-@color["gray"]="#AAAAAA"
+@color["gray"]="#c5c0a3"
 @color["darkgreen"]="#4A6D2C"
 @color["lightgreen"]="#9AD352"
 @color["champagne"]="#DED8B1"
 @color["greentext"]="#253A0B"
+@color["newgreen"]="#355310"
+@color["plum"] = "#34071e"
 %>
+h1, h2, h3, h4, h5, h6 {
+	font-weight:bold;
+	font-family:"Palatino Linotype", "Book Antiqua", "Palatino", serif;
+	/*font-family:"Georgia", serif;*/
+}
 
 h1 {
 	color: green;
@@ -83,7 +90,7 @@ td {padding:2px 2px 2px 10px;}
 #page{color:<%= @color["black"] %>;width:100%;margin:auto;}
 #header{text-align:center;}
 #main{width:85%;margin:auto;}
-#footer{height:60px;background-color:<%= @color["black"] %>; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
+#footer{height:60px;background-color:<%= @color["plum"] %>; color: white; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
 #login_box{text-align:right;}
 #logo {text-align:center;}
 #pageback {background:<%=@color["champagne"]%>;}
@@ -97,7 +104,7 @@ td {padding:2px 2px 2px 10px;}
 	list-style-type:none;
 	margin:-10px 0 0 30px;
 	padding:0;
-	background:<%= @color["black"] %>;
+	background:<%= @color["plum"] %>;
 	position:relative;
 	top:10px;
 } 
@@ -119,23 +126,24 @@ td {padding:2px 2px 2px 10px;}
 
 /* Classes */
 
-.colorback {background-color:<%= @color["gray"] %>; padding:15px;}
+.colorback {background-color:<%= @color["gray"] %>; padding:15px;border:3px <%= @color["darkgreen"] %> solid;}
 .teal {}
 .chart{padding:3px;border:3px <%= @color["black"] %> solid; background:white;float:left;width:612px;margin-right:8px;}
 .clearer{clear:both;}
 .csssucks table{padding:0px;margin:0px;}
 .csssucks td{border:1px solid black;}
 .zebra{background-color:<%= @color["champagne"] %>;}
-.formtable{color:<%= @color["black"] %>;font-weight:bold;}
-.bar{height:30px;background-color:<%= @color["black"]%>;}
+.formtable{color:<%= @color["black"] %>;}
+.bar{height:30px;background-color:<%= @color["plum"]%>;}
 .profile_picture{border:2px solid <%= @color["black"]%>;}
 .noedit{background-color:white; padding:2px; width:98.5%; border-right:4px solid <%= @color["gray"]%> }
 .hundredpx {height:100px;}
-.highlight{color:<%=@color["green"]%>;}
+.highlight{color:<%=@color["newgreen"]%>;font-family:"Palatino Linotype", "Book Antiqua", "Palatino", serif;font-weight:100;font-size:1.3em;}
 .headline{text-align:center;margin-top:0;color:<%=@color["black"]%>;}
 .timetext{font-size:10px;}
 .commenttext{font-size:13px;}
-.comment{border:1px dotted white;background-color:<%=@color["lightgreen"]%>; padding:10px;}
+.comment{border:1px dotted white;background-color:<%=@color["lightgreen"]%>; padding:20px;}
+.commentdiv{padding:20px 0px 10px 0px}
 .indent{margin-left:30px;}
 .box a{padding:10px; background-color:#fff;margin:5px;line-height:4em;border:2px #fff solid;}
 .box a:hover{border:2px <%= @color["darkgreen"] %> solid; background-image:url(../images/line.png);background-repeat:repeat-x;}
