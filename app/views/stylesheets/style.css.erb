@@ -4,12 +4,14 @@
 @color["black"]="#000000"
 @color["gray"]="#c5c0a3"
 @color["darkgreen"]="#4A6D2C"
-@color["lightgreen"]="#9AD352"
+@color["lightgreen"]="#cfd"
 @color["champagne"]="#DED8B1"
 @color["greentext"]="#253A0B"
 @color["newgreen"]="#355310"
 @color["plum"] = "#34071e"
+@border_size = 5
 %>
+
 h1, h2, h3, h4, h5, h6 {
 	font-weight:bold;
 	font-family:"Palatino Linotype", "Book Antiqua", "Palatino", serif;
@@ -82,13 +84,14 @@ td {padding:2px 2px 2px 10px;}
 /* Main Page Divs*/
 #page{color:<%= @color["black"] %>;width:70%;margin:auto;}
 #header{text-align:center;}
+#mainwrapper{border-left:<%=@border_size%>px <%=@color["darkgreen"] %> solid;border-right:<%=@border_size%>px <%=@color["darkgreen"] %> solid;padding-bottom:60px;}
 #main{width:85%;margin:auto;}
-#footer{height:60px;background-color:<%= @color["plum"] %>; color: <%= @color["champagne"]%>; border-top:10px <%= @color["darkgreen"] %> solid; text-align:center; margin-top:30px;}
+#footer{height:60px;background-color:<%= @color["plum"] %>; color: <%= @color["champagne"]%>; border-top:<%=@border_size%>px <%= @color["darkgreen"] %> solid; text-align:center;}
 #login_box{text-align:right;}
 #logo {text-align:center;}
-#pageback {background:<%=@color["champagne"]%>;border-left:5px <%=@color["plum"] %> solid;border-right:5px <%=@color["plum"] %> solid;}
-#nav{height:30px; color: white; border-bottom:10px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: bottom; }
-#subnav{ border-bottom:10px <%= @color["darkgreen"] %> solid;}
+#pageback {background:<%=@color["champagne"]%>;}
+#nav{height:30px; color: white; border-bottom:<%=@border_size%>px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: top; background:"url(../images/corners/top-left.png") no-repeat;}
+#subnav{ border-bottom:2px <%= @color["darkgreen"] %> solid;}
 
 .nav a{ font-size:18px; color: <%= @color["champagne"] %>;	height:50px;}
 .nav a:hover{color:<%= @color["champagne"] %>;background-color:<%= @color["darkgreen"]%>;}
@@ -136,8 +139,48 @@ td {padding:2px 2px 2px 10px;}
 .headline{text-align:center;margin-top:0;color:<%=@color["plum"]%>;}
 .timetext{font-size:10px;}
 .commenttext{font-size:13px;}
-.comment{border:1px dotted white;background-color:<%=@color["lightgreen"]%>; padding:20px;}
+.comment{border:1px dotted white;background-color:<%=@color["champagne"]%>; padding:20px;}
 .commentdiv{padding:20px 0px 10px 0px}
 .indent{margin-left:30px;}
-.box a{padding:10px; background-color:#fff;margin:5px;line-height:4em;border:2px #fff solid;}
-.box a:hover{border:2px <%= @color["darkgreen"] %> solid; background-image:url(../images/line.png);background-repeat:repeat-x;}
+.flash {line-height:0px;background:<%=@color["gray"]%>;padding:20px;border:3px <%=@color["green"]%> solid ;}
+.box a{padding:10px; background-color:<%= @color["gray"] %>;margin:10px;line-height:4em;border:2px <%= @color["darkgreen"] %> solid;}
+.box a:hover{border:2px <%= @color["plum"] %> solid; background-image:url(../images/stripe.png);background-repeat:repeat-x;}
+
+/* spiffy css corners www.spiffycorners.com*/
+
+.spiffy{display:block}
+.spiffy *{
+  display:block;
+  height:1px;
+  overflow:hidden;
+  font-size:.01em;
+  background:#34071e}
+.spiffy1{
+  margin-left:3px;
+  margin-right:3px;
+  padding-left:1px;
+  padding-right:1px;
+  border-left:1px solid #a79415;
+  border-right:1px solid #a79415;
+  background:#66451a}
+.spiffy2{
+  margin-left:1px;
+  margin-right:1px;
+  padding-right:1px;
+  padding-left:1px;
+  border-left:1px solid #eae610;
+  border-right:1px solid #eae610;
+  background:#5a361b}
+.spiffy3{
+  margin-left:1px;
+  margin-right:1px;
+  border-left:1px solid #5a361b;
+  border-right:1px solid #5a361b;}
+.spiffy4{
+  border-left:1px solid #a79415;
+  border-right:1px solid #a79415}
+.spiffy5{
+  border-left:1px solid #66451a;
+  border-right:1px solid #66451a}
+.spiffyfg{
+  background:#34071e}

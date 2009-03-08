@@ -10,33 +10,49 @@
 		<%= javascript_include_tag "jquery" %>
     </head>
     <body>
-        <div id="page">
+	
+
+	
+
+	
 			<div id="logo"><%= link_to image_tag ("Vinetown_logo.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>
 				<h2 class="headline"><em>Because wine is fun!</em></h2><br />
-            	<div id="pageback">
-				<div id="header">
-		        	              
-                	<div id="nav" class="nav">
-							<ul>
-								<% if session[:user_id] %>                        
-								<li><%= link_to ("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
-                        		<li><%= link_to ("Friends", :controller => :friends, :action => :index)%></li>                    
-								<li><%= link_to ("Messages", :controller => :messages, :action => :inbox)%></li>
-								<li><%= link_to "Groups", :controller => :groups, :action => :index %>
-								<li><%= link_to "Posts", :controller => :posts, :action => :new %>
+            	<div id="page">
+				<div>
+				  <b class="spiffy">
+				  <b class="spiffy1"><b></b></b>
+				  <b class="spiffy2"><b></b></b>
+				  <b class="spiffy3"></b>
+				  <b class="spiffy4"></b>
+				  <b class="spiffy5"></b></b>
 
-								<% else %>
-								<li><%= link_to "Login", :controller => :users, :action => :login %>
-								<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>									
-								<% end %>
-	                        	<li><%= link_to ("About", :controller => :home, :action => :about)%></li>
-								<% if session[:user_id] && User.find(session[:user_id]).admin %>
-								<li><%= link_to ("Admin", :controller => :admin, :action => :index)%></li>
-								<% end %>
-								
-							</ul>
-							<div class="bar"></div>
+				  <div class="spiffyfg">
+				<div id="pageback">
+				<div id="header">		        	              
+                	<div id="nav" class="nav">
+						<ul>
+							<% if session[:user_id] %>                        
+							<li><%= link_to ("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
+                       		<li><%= link_to ("Friends", :controller => :friends, :action => :index)%></li>                    
+							<li><%= link_to ("Messages", :controller => :messages, :action => :inbox)%></li>
+							<li><%= link_to "Groups", :controller => :groups, :action => :index %>
+							<li><%= link_to "Posts", :controller => :posts, :action => :new %>
+
+							<% else %>
+							<li><%= link_to "Login", :controller => :users, :action => :login %>
+							<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>									
+							<% end %>
+                        	<li><%= link_to ("About", :controller => :home, :action => :about)%></li>
+							<% if session[:user_id] && User.find(session[:user_id]).admin %>
+							<li><%= link_to ("Admin", :controller => :admin, :action => :index)%></li>
+							<% end %>
+							
+						</ul>
+						<div class="bar">	
+						</div>
 	                </div>
+	            </div>
+				<div id="mainwrapper">
 					<div id="login_box">
 	                    <% if session[:user_id] %>
 							<span class="commenttext">Signed in as <%= session[:user_email] %> <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span>
@@ -45,16 +61,28 @@
 							link_to "Pending friend request", :controller => :friends, :action => :index
 						   end %>
 	                </div>
-	            </div>
-	            <div id="main">
-	                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br /><% end %>
-					<% if @mb_errors %><p class="flash notice"><%= @mb_errors%></p><br /><% end %>
-	                <%= yield %>
+		            <div id="main">
+		                <% if flash[:notice] %><div class="flash"><%= flash[:notice] %></div><br /><% end %>
+						<% if @mb_errors %><p class="flash notice"><%= @mb_errors%></p><br /><% end %>
+		                <%= yield %>
+		            </div>
 	            </div>
 	            <div id="footer"><br />
 	                Enjoy
 	            </div>
             </div>
         </div>
+
+		
+		  </div>
+
+		  <b class="spiffy">
+		  <b class="spiffy5"></b>
+		  <b class="spiffy4"></b>
+		  <b class="spiffy3"></b>
+		  <b class="spiffy2"><b></b></b>
+		  <b class="spiffy1"><b></b></b></b>
+		</div>
+		</div>
     </body>
 </html>

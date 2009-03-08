@@ -9,6 +9,7 @@
 	Password:<br /><%= f.password_field(:password) %><br />
 <%= submit_tag "login" %>
 <% end %>
+<br />
 Don't have an account? <%= link_to "Sign Up Now", :controller => :users, :action => :signup %><br />
 Forgot your password? <%= link_to "Click here", :controller => :users, :action => :forgot_password %>
 </div>
