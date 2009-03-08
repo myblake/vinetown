@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_filter :authorize
+
   def index
     @users = User.find(:all)
     @size = @users.length
@@ -9,7 +11,15 @@ class AdminController < ApplicationController
       end
     end
   end
-
+  
+  def edit
+    @user = User.find(params[:id])
+    if params[:user]
+      @user.admin = params[:user][:admin]
+      @user.save
+    end
+  end
+  
   protected
   def authorize 
     unless User.find_by_id(session[:user_id]).admin

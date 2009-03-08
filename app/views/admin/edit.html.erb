@@ -1,0 +1,73 @@
+<h1 style="margin-bottom:0px"><%= @user.first_name + " " + @user.last_name %></h1>
+<span class="status"><%=h( @user.status )%></span>
+<div class="colorback">
+	<%= image_tag "cup.png", :class => "profile_picture"%><br />
+	&nbsp;
+	<% form_for :user, @user do |f|%>
+	Make User Admin
+	<%= f.check_box :admin %>
+	<%= f.submit "Update"%>
+	<% end %>
+<table class="formtable">
+	<tr>
+		<td>
+			<span class="highlight">Email</span><br />
+			<%=h( @user.email )%>
+		</td>
+	</tr>
+		<td>
+			<span class="highlight">Birthday</span><br />
+			<%= if @user.date_of_birth 
+				h( @user.date_of_birth.strftime("%B %d")) 
+			end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Current Hometown</span><br />
+			<%=h( @user.hometown) %>
+		</td>
+		<td>
+			<span class="highlight">State</span><br />
+			<%=h( @user.state) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Country</span><br />
+			<%=h( @user.country )%>
+		</td>
+		<td>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Interests</span><br />
+			<%=h( @user.interests) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Favorite Wines</span><br />
+			<%=h( @user.favorite_wines) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Favorite Food and Wine Pairings</span><br />
+			<%=h( @user.favorite_food_and_wine_pairings) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="highlight">Groups</span><br />
+			<% for group in @user.groups%>
+			<%= h(group.name)%><% unless group == @user.groups.last %>,<%end%>
+			<% end %>
+		</td>
+	</tr>
+	
+</table>
+</div>
