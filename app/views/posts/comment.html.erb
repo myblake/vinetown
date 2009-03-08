@@ -1,7 +1,7 @@
 <h1>New Comment</h1>
 <div class="colorback">
 <table class="formtable">
-<% form_for :comment, @comment, :url => {:params => { :post => { :id => @post_id }}} do |f| %>
+<% form_for :comment, @comment, :url => {:params => { :post => { :id => @post_id }, :parent => @parent_id} } do |f| %>
 	<tr><td><%= f.error_messages %></td></tr>
 	<tr>
 		<td>

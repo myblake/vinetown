@@ -1,15 +1,10 @@
 <h1><%=h @post.name%></h1>
 <div class="colorback">
-<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
+<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 <%=h @post.body%>
 <h4>Comments</h4>
 <%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%><br /><br />
 <div class="commenttext">
-<% for comment in @comments %>
-	<%=comment.user.first_name + " " + comment.user.last_name%><br /></span>
-	<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
-	<%= link_to "Reply", :action => :comment, :params => { :post => { :id => @post.id }, :comment => {:parent => comment.id }}%><br />	
-	<div class="comment"><%= h comment.text %></div> <br />
-<% end %>
+<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
 </div>
 </div>

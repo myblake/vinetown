@@ -23,10 +23,10 @@ class PostsController < ApplicationController
       @post_id = params[:post][:id]
     end
     if params[:comment][:text]
-      if params[:comment][:parent]
-        parent = params[:comment][:parent]  
+      if params[:parent]
+        parent = params[:parent]  
       else
-        parent = 'NULL'
+        parent = 0
       end
       @comment = Comment.new(:user_id => session[:user_id], :text => params[:comment][:text], :parent_id => parent, :post_id => params[:post][:id] )
       unless @comment.save
@@ -34,13 +34,27 @@ class PostsController < ApplicationController
         return
       end
       redirect_to :action => :view, :params => { :id => @post_id }
+    else
+      if params[:comment][:parent]
+        @parent_id = params[:comment][:parent]  
+      end
     end
   end
 
   def view
     @post = Post.find(params[:id])
-    @comments = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id")
-
+    @comments_array = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id ASC")
+    @comments = {}
+    @comments["0"] = []
+    for comment in @comments_array
+      if comment.parent_id == 0
+        @comments["0"].push(comment)
+        @comments[comment.id] = Array.new
+      else
+        @comments[comment.parent_id].push(comment)
+        @comments[comment.id] = Array.new
+      end
+    end
   end
   
 end
