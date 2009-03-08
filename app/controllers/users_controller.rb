@@ -190,6 +190,19 @@ class UsersController < ApplicationController
     redirect_to :action => :index
   end
   
+  def search
+    if params[:search]
+      query = params[:search][:query]
+      unless query.empty?
+        if m = query.match(/(\w*)\s(\w*)/)
+          @results = User.find(:all, :conditions => ["first_name like ? and last_name like ?", "#{m[1]}%", "#{m[2]}%"])
+        elsif m = query.match(/(\w*)/)
+          @results = User.find(:all, :conditions => ["first_name like ? or last_name like ?", "#{m[1]}%", "#{m[1]}%"])
+        end
+      end
+    end
+  end
+  
   # confirms user, link is emailed to user to confirm validity and ownership of email address
   # may want to change where we redirect to
   def confirm

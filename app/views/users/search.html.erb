@@ -1,0 +1,23 @@
+<% @count = 0 %>
+<h1>People Search</h1>
+<div class="colorback">
+<% form_for :search, @search do |f| %>
+	<%= f.text_field :query %>
+	<%= f.submit "Search" %>
+<% end %>
+<% unless @results.nil? or @results.empty? %>
+	<br /><br />
+	<table style="width:100%;">
+	<% for user in @results %>
+		<% @count+=1 %>
+		<% if @count%2 == 0 %>
+		  <tr>
+		<% else %>
+		  <tr class="zebra">
+		<% end %>
+	    <td><%= link_to h(user.first_name) + " " + h(user.last_name), :action => "profile", :params => { :id => user.id }   %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+</div>
