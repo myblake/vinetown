@@ -31,7 +31,7 @@
 <div class="blueback">
 <% if @friends.empty? %>
 	<!-- if no friends -->
-	<div class="box"><%= link_to "Go and make some!", :controller => "users", :action => "public_profiles" %></div>
+	<div class="box"><%= link_to "Go and make some!", :controller => :users, :action => :index %></div>
 <% else %>
 	<table>
 	  <tr>

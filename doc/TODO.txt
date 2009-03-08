@@ -6,7 +6,9 @@ ajax status bar stuff
 
 build out:
 structure for where posts go
-layer stuff
+	this will require finding some alternative to h() in order to properly parse certain markup elements (line breaks, headers, links, etc, while escaping <script> etc for security reasons. This could be homebrewed which would be fun, but open libraries should exist.)
+layer home/community/neighborhood
+	should just contain posts
 
 
 later:
