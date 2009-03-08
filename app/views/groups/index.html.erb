@@ -1,0 +1,8 @@
+<h1><span></span>Groups</h1>
+<div class="box"><%= link_to "New Group", :action => :new %></div>
+<div class="colorback">
+<h2>All Groups</h2>
+<% for group in @groups %>	
+	<%= link_to group.name, :action => :view, :params => {:id => group.id}%><br />
+<% end %>
+</div>

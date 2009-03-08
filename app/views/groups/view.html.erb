@@ -1,0 +1,16 @@
+<h1><%=h @group.name%></h1>
+<div class="colorback">
+<div class="box">
+<% unless GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id]) %>
+	<%= link_to "Join Group", :action => :join_group, :params => { :group_id => @group.id }%>
+<% end %>
+<% if GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id]).admin %>
+	<%= link_to "Edit Group", :action => :edit, :params => { :id => @group.id }%>
+<% end %>
+</div>
+<%= @group.description %>
+<h2>Members</h2>
+<% for user in @group.users %>
+	<%= user.username %>
+<% end %>
+</div>

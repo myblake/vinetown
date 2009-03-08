@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
   # add validation for:
   # dob format
   
+  def username
+    return "#{first_name} #{last_name}"
+  end
+  
+  def join_group(group)
+    groups << group
+  end
+  
   def email_correct?
     unless email=~/.*\@.*\..*/
       errors.add(:email, "Check email address for \"@\" and \".\" characters.")
