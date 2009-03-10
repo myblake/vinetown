@@ -135,7 +135,7 @@ class UsersController < ApplicationController
   def create_welcome
     user = User.find(:first, :conditions => ["email=?", params[:email]])
     if UserMailer.deliver_welcome(user)
-      flash[:notice] = "A confirmation issue has been sent to the address you provided."
+      flash[:notice] = "A confirmation email has been sent to the address you provided."
     else
       flash[:notice] = "We have experienced an issue with our mail servers. Please contact vinetown@vinetown.com for more assistance."
     end
@@ -143,9 +143,9 @@ class UsersController < ApplicationController
   end
   
   def view_email
-    user = User.find(:first, :conditions => ["email=?", params[:email]])
-    email = UserMailer.create_welcome(user)
-    render ( :text => "<pre>" + email.encoded + "</pre>" )
+    #user = User.find(:first, :conditions => ["email=?", params[:email]])
+    #email = UserMailer.create_welcome(user)
+    #render ( :text => "<pre>" + email.encoded + "</pre>" )
   end
   
   def forgot_password

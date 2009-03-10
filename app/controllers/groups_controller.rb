@@ -44,6 +44,14 @@ class GroupsController < ApplicationController
   
   def view
     @group = Group.find(params[:id])
+    @user = GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id])
+    if @user
+      @member = true
+      @admin = GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id]).admin
+      if @admin.nil? 
+        @admin = false
+      end
+    end
   end
-  
+    
 end

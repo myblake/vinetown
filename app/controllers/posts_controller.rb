@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     if params[:post]
       @post_id = params[:post][:id]
     end
-    if params[:comment][:text]
+    if params[:comment] && params[:comment][:text]
       if params[:parent]
         parent = params[:parent]  
       else
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
       end
       redirect_to :action => :view, :params => { :id => @post_id }
     else
-      if params[:comment][:parent]
+      if params[:comment] && params[:comment][:parent]
         @parent_id = params[:comment][:parent]  
       end
     end

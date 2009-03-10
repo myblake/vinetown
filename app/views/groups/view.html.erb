@@ -1,9 +1,9 @@
 <h1><%=h @group.name%></h1>
 <div class="box">
-<% unless GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id]) %>
+<% unless @member %>
 	<%= link_to "Join Group", :action => :join_group, :params => { :group_id => @group.id }%>
 <% end %>
-<% if GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id]).admin %>
+<% if @admin %>
 	<%= link_to "Edit Group", :action => :edit, :params => { :id => @group.id }%>
 <% end %>
 </div>
