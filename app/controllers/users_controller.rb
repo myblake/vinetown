@@ -142,6 +142,12 @@ class UsersController < ApplicationController
     redirect_to :action => :index
   end
   
+  def view_email
+    user = User.find(:first, :conditions => ["email=?", params[:email]])
+    email = UserMailer.create_welcome(user)
+    render ( :text => "<pre>" + email.encoded + "</pre>" )
+  end
+  
   def forgot_password
     
   end
