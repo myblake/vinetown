@@ -1,5 +1,6 @@
 on users:
-search for users
+search for users - done
+add martial status, disambiguate from regular status
 friend interface => better way to add friends, control who sees your profile etc.
 ajax status bar stuff
 
