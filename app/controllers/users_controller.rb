@@ -204,9 +204,9 @@ class UsersController < ApplicationController
           @results = User.find(:all, :conditions => ["first_name like ? and last_name like ?", "#{m[1]}%", "#{m[2]}%"])
         elsif m = query.match(/(\w*)/)
           @results = User.find(:all, :conditions => ["first_name like ? or last_name like ?", "#{m[1]}%", "#{m[1]}%"])
-        else
-          @results = User.find(:all)
         end
+      else
+        @results = User.find(:all)  
       end
     end
   end
