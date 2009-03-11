@@ -8,6 +8,9 @@ class HomeController < ApplicationController
   end
   
   def index
+    #pull in posts
+    @posts = Post.find(:all, :conditions => ["home_page = 1"])
+    @news = Post.find(:all, :conditions => ["news = 1"])
   end
   
   def edit_about_us

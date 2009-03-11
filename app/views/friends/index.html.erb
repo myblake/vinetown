@@ -10,16 +10,15 @@
 	    <th>Last<th>
 	    <th><th>
 	  </tr>
-		<% for user in @friend_requests %>
+		<% for friend in @friend_requests
+		 	user = User.find(friend) %>
 			<% @count+=1 %>
 			<% if @count%2 == 0 %>
 			  <tr>
 			<% else %>
 			  <tr class="zebra">
 			<% end %>
-		    <td><%= link_to User.find(message.sender_user_id).first_name + " " + User.find(message.sender_user_id).last_name, :controller => :users, :action => :profile, :params => { :id => message.sender_user_id } %></td>
-		    <td><%=h user.first_name %></td>
-		    <td><%=h user.last_name %></td>
+		    <td><%= link_to user.first_name + " " + user.last_name, :controller => :users, :action => :profile, :params => { :id => friend } %></td>
 			<td><%= link_to "Accept", :action => "accept_friend", :params => {:user_id => user.id }%></td>
 			<td><%= link_to "Reject", :action => "reject_friend", :params => {:user_id => user.id }%></td>
 		  </tr>
@@ -34,22 +33,15 @@
 	<div class="box"><%= link_to "Go and make some!", :controller => :users, :action => :search %></div>
 <% else %>
 	<table>
-	  <tr>
-	    <th>Username</th>
-	    <th>First</th>
-	    <th>Last<th>
-	  </tr>
-
-	<% for user in @friends %>
+	<% for friend in @friends 
+		user = User.find(friend)%>
 		<% @count+=1 %>
 		<% if @count%2 == 0 %>
 		  <tr>
 		<% else %>
 		  <tr class="zebra">
 		<% end %>
-		<td><%= link_to user.first_name + " " + user.last_name, :controller => :users, :action => :profile, :params => { :id => user.id } %></td>
-	    <td><%=h user.first_name %></td>
-	    <td><%=h user.last_name %></td>
+		<td><%= link_to user.first_name + " " + user.last_name, :controller => :users, :action => :profile, :params => { :id => friend } %></td>	  
 	  </tr>
 	<% end %>
 	</table>

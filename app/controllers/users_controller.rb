@@ -76,6 +76,7 @@ class UsersController < ApplicationController
 	end
 	
   def index
+    redirect_to :controller => :home, :action => :index
   end
   
   def profile
@@ -83,6 +84,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Couldn't not find user"
       redirect_to :action => :index
     end
+    @friends = Friend.find(:first, :conditions => ["(user_id_1=? and user_id_2=?) or (user_id_1=? and user_id_2=?)", session[:user_id], @user.id, @user.id, session[:user_id]])
   end
 
   def edit_profile

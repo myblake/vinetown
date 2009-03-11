@@ -24,7 +24,7 @@ class FriendsController < ApplicationController
     @user = User.find(params[:user_id])
     @friend = Friend.new(:user_id_1 => session[:user_id], :user_id_2 => params[:user_id], :accepted => false, :rejected => false)
     @friend.save
-    if params[:redirect] = "index"
+    if params[:redirect] == "index"
       flash[:notice] = "Your have requested to become friends with #{@user.username}"
       redirect_to :controller => :users, :action => :index
       return

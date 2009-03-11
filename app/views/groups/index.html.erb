@@ -1,8 +1,17 @@
+<% @count=0%>
 <h1><span></span>Groups</h1>
 <div class="box"><%= link_to "New Group", :action => :new %></div>
 <div class="colorback">
 <h2>All Groups</h2>
-<% for group in @groups %>	
-	<%= link_to group.name, :action => :view, :params => {:id => group.id}%><br />
+<table style="width:100%">
+<% for group in @groups %>
+<% @count+=1 %>
+<% if @count%2 == 0 %>
+  <tr>
+<% else %>
+  <tr class="zebra">
+<% end %>	
+	<td><%= link_to group.name, :action => :view, :params => {:id => group.id}%></td></tr><br />
 <% end %>
+</table>
 </div>

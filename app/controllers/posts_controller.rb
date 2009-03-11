@@ -1,8 +1,26 @@
 class PostsController < ApplicationController
 
+  # delete posts
+  
+  def index
+    @posts = Post.find(:all, :conditions => ["user_id=?", session[:user_id]])
+  end
+
   def new
+    @groupusers = GroupsUsers.find(:all, :conditions => ["user_id=?", session[:user_id]])    
+    @groups = {}
+    for group_id in @groupusers
+      group = Group.find(:first, :conditions => ["id=?", group_id.group_id])
+      @groups[group.name] = group.id
+    end
     if params[:post]
-      @post = Post.new(:user_id => session[:user_id], :name => params[:post][:name], :body => params[:post][:body])
+      @post = Post.new( :user_id => session[:user_id],
+                        :name => params[:post][:name], 
+                        :body => params[:post][:body],
+                        :news => params[:post][:news],
+                        :home_page => params[:post][:home_page],
+                        :community_page => params[:post][:community_page],
+                        :group_id => params[:post][:group_id])
       unless @post.save
         flash[:error] = "Could not save post"
         return
@@ -16,6 +34,32 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @groupusers = GroupsUsers.find(:all, :conditions => ["user_id=?", session[:user_id]])    
+    @groups = {}
+    for group_id in @groupusers
+      group = Group.find(:first, :conditions => ["id=?", group_id.group_id])
+      @groups[group.name] = group.id
+    end
+    if params[:post]
+      @post.name = params[:post][:name]
+      @post.body = params[:post][:body]
+      @post.news = params[:post][:news]
+      @post.home_page = params[:post][:home_page]
+      @post.community_page = params[:post][:community_page]
+      if params[:post][:group] == 1
+        @post.group_id = params[:post][:group_id]
+      else
+        @post.group_id = 0
+      end
+      if @post.save
+        flash[:notice] = "Post Updated"
+        redirect_to :action => :view, :params => {:id => @post.id}
+      else
+        flash[:notice] = "Error saving post."
+        redirect_to :action => :edit
+      end
+    end
   end
 
   def comment
@@ -43,6 +87,7 @@ class PostsController < ApplicationController
 
   def view
     @post = Post.find(params[:id])
+    @edit = (@post.user.id == session[:user_id])
     @comments_array = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id ASC")
     @comments = {}
     @comments["0"] = []

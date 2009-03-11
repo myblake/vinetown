@@ -1,8 +1,13 @@
 <h1 style="margin-bottom:0px"><%= @user.first_name + " " + @user.last_name %></h1>
-<span class="status"><%=h( @user.status )%></span>
+<span class="status"><%=h( @user.status )%></span><br /><br />
 <% if @user.id == session[:user_id] %>
 <div class="box"><%= link_to "Edit My Profile", :action => :edit_profile%></div>
-<% end %>
+<% else 
+	unless @friends %>
+	<div class="box"><%= link_to "Add User to Friends", :controller => "friends", :action => "friend_request", :params => {:user_id => @user.id} %>
+	</div>
+<% end 
+end %>
 <div class="colorback">
 	<%= image_tag "cup.png", :class => "profile_picture"%><br />
 	&nbsp;

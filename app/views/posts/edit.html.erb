@@ -1,0 +1,47 @@
+<h1>New Post</h1>
+<div class="colorback">
+<table class="formtable">
+<% form_for :post, @post do |f| %>
+
+	<tr><td><%= f.error_messages %></td></tr>
+	<tr>
+		<td>
+			Title<br />
+			<%= f.text_field :name %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :body %><br />
+			<%= f.text_area :body %>
+		</td>
+	</tr>
+	<% if User.find(session[:user_id]).admin %>
+	<tr>
+		<td>
+			<%= f.check_box :news %>Post to News
+		</td>
+	</tr>
+	<% end %>
+	<tr>
+		<td>
+			<%= f.check_box :home_page %>Submit to Home Page
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.check_box :community_page %>Submit to Community Page
+		</td>
+	</tr>
+	<tr>
+		<td>			
+			<%= f.check_box :group, :checked => !@post.group_id.nil? %>Post to Group<br />
+			<%= select(:post, :group_id, @groups) %>
+		</td>
+	</tr>
+
+	<tr><td><%= f.submit "Submit" %><br /></td></tr>
+	
+<% end %>
+</table>
+</div>

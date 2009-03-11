@@ -2,6 +2,8 @@
 <div class="box">
 <% unless @member %>
 	<%= link_to "Join Group", :action => :join_group, :params => { :group_id => @group.id }%>
+<% else %>
+	You are a member of this group
 <% end %>
 <% if @admin %>
 	<%= link_to "Edit Group", :action => :edit, :params => { :id => @group.id }%>
@@ -12,5 +14,14 @@
 <h2>Members</h2>
 <% for user in @group.users %>
 	<%= link_to user.username, :controller => :users, :action => :profile, :params => { :id => user.user_id } %>
+<% end %>
+<h2>Recent Posts</h2>
+<% for post in @posts %>
+	<%= post.name%> -
+	<%= link_to post.user.username, :controller => :users, :action => :profile, :params => { :id => user.user_id } %><br />
+	<span class="timetext"><%= post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
+	<%= post.body[0,200].chomp(" ") %><% if post.body.length > 200 %>... 
+	<% end %>
+	<%= link_to "View Full Post", :controller => :posts, :action => :view, :params => {:id => post.id} %><br />
 <% end %>
 </div>

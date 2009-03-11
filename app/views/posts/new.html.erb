@@ -15,7 +15,29 @@
 			<%= f.label :body %><br />
 			<%= f.text_area :body %>
 		</td>
-
+	</tr>
+	<% if User.find(session[:user_id]).admin %>
+	<tr>
+		<td>
+			<%= f.check_box :news %>Post to News
+		</td>
+	</tr>
+	<% end %>
+	<tr>
+		<td>
+			<%= f.check_box :home_page %>Submit to Home Page
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.check_box :community_page %>Submit to Community Page
+		</td>
+	</tr>
+	<tr>
+		<td>			
+			<%= f.check_box :group %>Post to Group<br />
+			<%= select(:post, :group_id, @groups) %>
+		</td>
 	</tr>
 
 	<tr><td><%= f.submit "Submit" %><br /></td></tr>

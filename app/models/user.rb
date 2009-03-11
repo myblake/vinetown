@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
   
   def join_group(group)
-    groups << group
+    GroupsUsers.new(:group_id => group.id, :user_id => self.id).save
   end
   
   def email_correct?
