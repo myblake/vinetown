@@ -2,8 +2,8 @@
 <% @count = 0 %>
 <% unless @friend_requests.empty? %>
 	<h1>Friend Requests</h1>
-	<div class="blueback">
-	<table>
+	<div class="colorback">
+	<table class="ztable">
 	  <tr>
 	    <th>Username</th>
 	    <th>First</th>
@@ -27,12 +27,12 @@
 	</div>	
 <% end %>
 <h1>Your <span class="teal">Friends</span></h1>
-<div class="blueback">
+<div class="colorback">
 <% if @friends.empty? %>
 	<!-- if no friends -->
 	<div class="box"><%= link_to "Go and make some!", :controller => :users, :action => :search %></div>
 <% else %>
-	<table>
+	<table class="ztable">
 	<% for friend in @friends 
 		user = User.find(friend)%>
 		<% @count+=1 %>

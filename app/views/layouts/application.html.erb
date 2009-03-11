@@ -53,8 +53,7 @@
 				<div id="mainwrapper">
 					<div id="login_box">
 	                    <% if session[:user_id] %>
-							<span class="commenttext">Signed in as <%= session[:user_email] %> <span class="special">
-							<%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span></span>
+							<span class="commenttext">Signed in as <%= session[:user_email] %> <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span>
 						<% end %><br />
 						<%= if pending 
 							link_to "Pending friend request", :controller => :friends, :action => :index
