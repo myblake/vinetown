@@ -13,6 +13,13 @@ class HomeController < ApplicationController
     @news = Post.find(:all, :conditions => ["news = 1"])
   end
   
+  def community
+    unless session[:user_id]
+      redirect_to :action => :index
+    end
+    @posts = Post.find(:all, :conditions => ["community_page = 1"])
+  end
+  
   def edit_about_us
     unless User.find_by_id(session[:user_id]).admin
       redirect_to :action => :index
