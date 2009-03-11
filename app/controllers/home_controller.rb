@@ -7,6 +7,14 @@ class HomeController < ApplicationController
     end
   end
   
+  def neighborhood
+    @user = User.find(session[:user_id])
+    if params[:user]
+      @user.status = params[:user][:status]
+      @user.save
+    end
+  end
+  
   def index
     #pull in posts
     @posts = Post.find(:all, :conditions => ["home_page = 1"])

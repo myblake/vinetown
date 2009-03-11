@@ -6,7 +6,7 @@
 
 <% form_for :user, @user, :url => {:controller => :users, :action => :login_backend} do |f| %>
 	Email:<br /><%= f.text_field(:email)%> <br/ >
-	Password:<br /><%= f.password_field(:password) %><br />
+	Password:<br /><%= f.password_field(:password) %><br /><br />
 <div class="box"><%= submit_tag "login" %></div>
 <% end %>
 <br />

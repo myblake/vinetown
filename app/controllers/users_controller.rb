@@ -89,10 +89,13 @@ class UsersController < ApplicationController
 
   def edit_profile
     @user = User.find(session[:user_id])
+    if params[:user_status]
+      @user.status = params[:user_status][:status]
+      @user.save
+    end
     if params[:user]
       @user.first_name = params[:user][:first_name]
       @user.last_name = params[:user][:last_name]
-      
       if params[:user][:password] != ""      
         if params[:user][:password] != params[:user][:password_confirm]
     	    flash[:notice] = "Passwords don't match"
@@ -113,6 +116,10 @@ class UsersController < ApplicationController
   
   def edit_profile_2
     @user = User.find(session[:user_id])
+    if params[:user_status]
+      @user.status = params[:user_status][:status]
+      @user.save
+    end
     if params[:user]      
       dob = Time.parse(params[:user][:date_of_birth])
   		@user.date_of_birth = dob
@@ -120,7 +127,7 @@ class UsersController < ApplicationController
   		@user.hometown  = params[:user][:hometown]
   		@user.state  = params[:user][:state]
   		@user.country = params[:user][:country]
-  		@user.status = params[:user][:status]
+  		@user.relationship_status = params[:user][:relationship_status]
       @user.interests = params[:user][:interests]
       @user.favorite_wines = params[:user][:favorite_wines]
     	@user.favorite_food_and_wine_pairings = params[:user][:favorite_food_and_wine_pairings]

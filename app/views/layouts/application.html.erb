@@ -9,7 +9,7 @@
     	<%= stylesheet_link_tag "style" %>
 		<%= javascript_include_tag "jquery" %>
     </head>
-    <body background="/images/Grapes_during_pigmentation2.jpg" style="background-repeat:no-repeat;">
+    <body background="/images/Grapes_during_pigmentation3.jpg" style="background-repeat:no-repeat;">
 		<!--<div class="borderleft"><b></b></div><div class="borderright"><b></b></div>-->
 			<div id="logo"><%= link_to image_tag("Vinetown_logo_trans.png", :alt=>"logo"), :controller => "users", :action => "index" %></div>
 				<h2 class="headline"><em>Because wine is fun!</em></h2><br />
@@ -28,19 +28,14 @@
                 	<div id="nav" class="nav">
 						<ul>
 							<% if session[:user_id] %>                        
-							<li><%= link_to "Home", :controller => :home, :action => :index %>
-							<li><%= link_to "Community", :controller => :home, :action => :community %>
-							<li><%= link_to("Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
-                       		<li><%= link_to("Friends", :controller => :friends, :action => :index)%></li>                    
-							<li><%= link_to("Messages", :controller => :messages, :action => :inbox)%></li>
-							<li><%= link_to "Groups", :controller => :groups, :action => :index %>
-							<li><%= link_to "Posts", :controller => :posts, :action => :index %>
-
+							<li><%= link_to "Vinetown Home", :controller => :home, :action => :index %>
+							<li><%= link_to "My Community", :controller => :home, :action => :community %>
+							<li><%= link_to "My Neighborhood", :controller => :home, :action => :neighborhood %>
 							<% else %>
 							<li><%= link_to "Login", :controller => :users, :action => :login %>
 							<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>									
 							<% end %>
-                        	<li><%= link_to("About", :controller => :home, :action => :about)%></li>
+                        	<li><%= link_to("About Vinetown", :controller => :home, :action => :about)%></li>
 							<% if session[:user_id] && User.find(session[:user_id]).admin %>
 							<li><%= link_to("Admin", :controller => :admin, :action => :index)%></li>
 							<% end %>

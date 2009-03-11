@@ -1,4 +1,7 @@
+<h1>About Vinetown</h1>
+<div class="colorback">
 <% if session[:user_id] && User.find(session[:user_id]).admin %>
 	<%= link_to "Edit", :action => :edit_about_us %><br />
 <% end %>
 <%= @about.text %>
+</div>

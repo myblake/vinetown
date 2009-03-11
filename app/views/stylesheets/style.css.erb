@@ -18,15 +18,18 @@ h1, h2, h3, h4, h5, h6 {
 	/*font-family:"Georgia", serif;*/
 }
 
+
+
 div {
 	margin:0px;
 	padding:0px;
 }
 
-body { background-color: #fff; background-image: url(../images/Grapes_during_pigmentation.jpg) no-repeat;
+body { background-color: <%=@color["champagne"]%>; background-image: url(../images/Grapes_during_pigmentation.jpg) no-repeat;
 	font-family: arial, helvetica, sans-serif;
 	font-size:   18px;
 	line-height: 18px;
+	
 }
 
 input, textarea {
@@ -163,9 +166,11 @@ td {padding:2px 2px 2px 10px;}
 .commentdiv{padding:20px 0px 10px 0px}
 .indent{margin-left:30px;}
 .flash {line-height:0px;background:<%=@color["gray"]%>;padding:20px;border:3px <%=@color["green"]%> solid ;}
-.box a{padding:10px; background-color:<%= @color["gray"] %>;margin:10px;line-height:4em;border:2px <%= @color["darkgreen"] %> solid;}
+.box {margin-top:-20px;}
+.colorback .box {margin-top:0px;}
+.box a{padding:10px; background-color:<%= @color["champagne"] %>;margin:10px;line-height:4em;border:2px <%= @color["darkgreen"] %> solid;}
 .box a:hover{border:2px <%= @color["plum"] %> solid; background-image:url(../images/stripe.png);background-repeat:repeat-x;}
-.box input{padding:10px; background-color:<%= @color["champagne"] %>;margin:10px;line-height:4em;border:2px <%= @color["darkgreen"] %> solid;}
+.box input{padding:2px; background-color:<%= @color["champagne"] %>;margin:0px;line-height:2em;border:2px <%= @color["darkgreen"] %> solid;}
 .home{width:50%;vertical-align:top;}
 .borderleft{background-image:url("../images/left_border.png");float:left;width:100px;height:500px;position:absolute;top:0;left:0;}
 .borderright{background-image:url("../images/right_border.png");float:right;width:100px;height:500px;position:absolute;top:0;right:0;}

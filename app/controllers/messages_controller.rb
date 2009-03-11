@@ -21,7 +21,9 @@ class MessagesController < ApplicationController
   end
   
   def send_message
-    @value = params[:receiver_email]
+    @user = User.find(params[:id])
+    @value = @user.email
+    #@value = params[:receiver_email]
   end
   
   def send_message_backend

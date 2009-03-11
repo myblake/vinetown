@@ -31,6 +31,7 @@
 	<!-- if no friends -->
 	<div class="box"><%= link_to "Go and make some!", :controller => :users, :action => :search %></div>
 <% else %>
+	<div class="box"><%= link_to "People Search!", :controller => :users, :action => :search %></div>
 	<table class="ztable">
 	<% for friend in @friends 
 		user = User.find(friend)%>

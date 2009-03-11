@@ -1,4 +1,7 @@
-<h1><%= @user.first_name + " " + @user.last_name %></h1>
+<h1 style="margin-bottom:2px"><%= @user.first_name + " " + @user.last_name %></h1>
+<% form_for :user_status, @user do |f| %>
+What are you up to? <%= f.text_field :status %><span class="box">&nbsp;<%= f.submit "Update"%></span>
+<% end %>
 <% if @user.id == session[:user_id] %>
 <div class="box"><%= link_to "View", :action => :profile, :params => { :id => session[:user_id] }%></div>
 <% end %>

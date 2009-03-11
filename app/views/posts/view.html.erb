@@ -1,13 +1,16 @@
-<h1><%=h @post.name%></h1>
+<h1><%= @post.name%></h1>
 <div class="colorback">
 <% if @edit %>
 <div class="box"><%=link_to "Edit", :action => :edit, :params => {:id => @post.id} %></div><br />
 <% end %>
 <span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
-<%=h @post.body%>
+<%= @post.body%>
+<% if @comment %>
 <h4>Comments</h4>
-<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div><br /><br />
-<div class="commenttext">
-<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
+	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div><br /><br />
+	<div class="commenttext">
+	<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
+	</div>
+<% end %>
 </div>
-</div>
+

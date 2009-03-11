@@ -28,10 +28,6 @@ class PostsController < ApplicationController
       redirect_to :action => :view, :params => { :id => @post.id }
     end
   end
-  
-  def new_backend
-    
-  end
 
   def edit
     @post = Post.find(params[:id])
@@ -88,9 +84,17 @@ class PostsController < ApplicationController
 
   def view
     @post = Post.find(params[:id])
-    @edit = (@post.user.id == session[:user_id])
-    @comments_array = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id ASC")
+    @post.name = @post.name.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
+    @post.body = @post.body.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
+    @post.body = @post.body.gsub("\n", "<br />")
     @comments = {}
+    if session[:user_id]
+      @edit = (@post.user.id == session[:user_id])
+    else 
+      @edit = false
+      return
+    end
+    @comments_array = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id ASC")
     @comments["0"] = []
     for comment in @comments_array
       if comment.parent_id == 0

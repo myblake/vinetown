@@ -1,0 +1,18 @@
+<h1 style="margin-bottom:2px">My Neighborhood - <%= h @user.username %></h1>
+<% form_for :user, @user do |f| %>
+What are you up to? <%= f.text_field :status %><span class="box">&nbsp;<%= f.submit "Update"%></span>
+<% end %>
+<br />
+<div id="subnav" class="nav bar">
+	<ul>
+		<li><%= link_to("Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
+		<li><%= link_to("Friends", :controller => :friends, :action => :index)%></li>                    
+		<li><%= link_to("Messages", :controller => :messages, :action => :inbox)%></li>
+		<li><%= link_to "Groups", :controller => :groups, :action => :index %>
+		<li><%= link_to "Posts", :controller => :posts, :action => :index %>
+	</ul>
+</div>
+<div class="colorback"><br /></div>
+
+
+
