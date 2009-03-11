@@ -47,11 +47,12 @@ class PostsController < ApplicationController
       @post.news = params[:post][:news]
       @post.home_page = params[:post][:home_page]
       @post.community_page = params[:post][:community_page]
-      if params[:post][:group] == 1
+      if params[:post][:group] == '1'
         @post.group_id = params[:post][:group_id]
       else
         @post.group_id = 0
       end
+      #asdf
       if @post.save
         flash[:notice] = "Post Updated"
         redirect_to :action => :view, :params => {:id => @post.id}

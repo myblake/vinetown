@@ -3,7 +3,7 @@
 <% unless @member %>
 	<%= link_to "Join Group", :action => :join_group, :params => { :group_id => @group.id }%>
 <% else %>
-	You are a member of this group
+	You are a member of this group<br />
 <% end %>
 <% if @admin %>
 	<%= link_to "Edit Group", :action => :edit, :params => { :id => @group.id }%>

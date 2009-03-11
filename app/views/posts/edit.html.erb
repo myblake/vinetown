@@ -35,7 +35,7 @@
 	</tr>
 	<tr>
 		<td>			
-			<%= f.check_box :group, :checked => !@post.group_id.nil? %>Post to Group<br />
+			<%= f.check_box :group, :checked => !@post.group_id == 0 %>Post to Group<br />
 			<%= select(:post, :group_id, @groups) %>
 		</td>
 	</tr>

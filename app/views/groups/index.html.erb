@@ -5,13 +5,7 @@
 <h2>All Groups</h2>
 <table style="width:100%">
 <% for group in @groups %>
-<% @count+=1 %>
-<% if @count%2 == 0 %>
-  <tr>
-<% else %>
-  <tr class="zebra">
-<% end %>	
-	<td><%= link_to group.name, :action => :view, :params => {:id => group.id}%></td></tr><br />
+<% @count+=1 %><% if @count%2 == 0 %><tr><% else %><tr class="zebra"><% end %><td><%= link_to group.name, :action => :view, :params => {:id => group.id}%></td></tr>
 <% end %>
 </table>
 </div>
