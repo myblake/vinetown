@@ -1,3 +1,4 @@
+<% @count = 0 %>
 <h1><%=h @group.name%></h1>
 <div class="box">
 <% unless @member %>
@@ -12,9 +13,13 @@
 <div class="colorback">
 <%= @group.description %>
 <h2>Members</h2>
+<table class="ztable">
 <% for user in @group.users %>
-	<%= link_to user.username, :controller => :users, :action => :profile, :params => { :id => user.user_id } %>
+	
+<% @count+=1 %><% if @count%2 == 0 %><tr><% else %><tr class="zebra"><% end %><td><%= link_to user.username, :controller => :users, :action => :profile, :params => { :id => user.user_id } %></td></tr>
+
 <% end %>
+</table>
 <h2>Recent Posts</h2>
 <% for post in @posts %>
 	<%= post.name%> -
@@ -22,6 +27,6 @@
 	<span class="timetext"><%= post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 	<%= post.body[0,200].chomp(" ") %><% if post.body.length > 200 %>... 
 	<% end %>
-	<%= link_to "View Full Post", :controller => :posts, :action => :view, :params => {:id => post.id} %><br />
+	<%= link_to "View Full Post", :controller => :posts, :action => :view, :params => {:id => post.id} %><br /><% unless post == @posts.last %><hr /><% end %>
 <% end %>
 </div>

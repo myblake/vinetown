@@ -7,7 +7,7 @@
 <% form_for :user, @user, :url => {:controller => :users, :action => :login_backend} do |f| %>
 	Email:<br /><%= f.text_field(:email)%> <br/ >
 	Password:<br /><%= f.password_field(:password) %><br />
-<%= submit_tag "login" %>
+<div class="box"><%= submit_tag "login" %></div>
 <% end %>
 <br />
 Don't have an account? <%= link_to "Sign Up Now", :controller => :users, :action => :signup %><br />
