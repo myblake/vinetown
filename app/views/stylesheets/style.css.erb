@@ -8,7 +8,11 @@
 @color["champagne"]="#DED8B1"
 @color["greentext"]="#253A0B"
 @color["newgreen"]="#355310"
-@color["plum"] = "#34071e"
+#@color["plum"] = "#34071e"
+#@color["plum"] = "#731921"
+#@color["plum"] = "#762e3c"
+#@color["plum"] = "#703545"
+@color["plum"] = "#731841"
 @border_size = 5
 %>
 
@@ -112,6 +116,7 @@ td {padding:2px 2px 2px 10px;}
 #footer{height:60px;background-color:<%= @color["plum"] %>; color: <%= @color["champagne"]%>; border-top:<%=@border_size%>px <%= @color["darkgreen"] %> solid; text-align:center;}
 #login_box{text-align:right;}
 #logo {text-align:center;}
+#logo a{color: <%= @color["plum"] %>; font-size:4em;line-height:1em;margin-top:2px;}
 #pageback {background:url("../images/bgcolor.png");}
 #nav{height:30px; color: white; border-bottom:<%=@border_size%>px <%= @color["darkgreen"] %> solid; text-align:left; vertical-align: top;}
 #subnav{ border-bottom:2px <%= @color["darkgreen"] %> solid;}
@@ -159,7 +164,7 @@ td {padding:2px 2px 2px 10px;}
 .noedit{background-color:white; padding:2px; width:98.5%; border-right:4px solid <%= @color["gray"]%> }
 .hundredpx {height:100px;}
 .highlight{color:<%=@color["newgreen"]%>;font-family:"Palatino Linotype", "Book Antiqua", "Palatino", serif;font-weight:100;font-size:1.3em;}
-.headline{text-align:center;margin-top:0;color:<%=@color["plum"]%>;}
+.headline{text-align:center;margin-top:0;color:<%=@color["darkgreen"]%>;}
 .timetext{font-size:10px;}
 .commenttext{font-size:13px;}
 .comment{border:1px dotted white;background-color:<%=@color["champagne"]%>; padding:20px;}
@@ -183,7 +188,7 @@ td {padding:2px 2px 2px 10px;}
   height:1px;
   overflow:hidden;
   font-size:.01em;
-  background:#34071e}
+  background:<%= @color["plum"]%>}
 .spiffy1{
   margin-left:3px;
   margin-right:3px;
