@@ -79,7 +79,7 @@
 					<td>
 						<span class="highlight">Groups</span><br />
 						<% for group in @user.groups%>
-						<%= link_to h(group.name), :controller => :groups, :action => :view, :params => {:id => group.id}%><% unless group == @user.groups.last %>,<%end%>
+						<%= link_to h(group.name), :controller => :groups, :action => :view, :params => {:id => group.group_id}%><% unless group == @user.groups.last %>,<%end%>
 						<% end %>
 					</td>
 				</tr>
