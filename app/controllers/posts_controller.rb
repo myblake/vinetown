@@ -86,11 +86,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.name = @post.name.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
     @post.body = @post.body.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
-    @post.body = @post.body.gsub(/\=(\w*\s*)*?\=/)
     @post.body = @post.body.gsub("\n", "<br />")
     @comments = {}
     if session[:user_id]
       @edit = (@post.user.id == session[:user_id])
+      @comment = true
     else 
       @edit = false
       return

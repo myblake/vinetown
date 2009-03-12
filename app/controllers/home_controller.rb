@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   def about
     @about = AboutUs.find(:first)
     @about.text = @about.text.gsub("\n", "<br />")
-    @about.text = @about.text.gsub("=","header here")
     if @about.nil?
       @about = AboutUs.new(:text=>"Please edit")
       @about.save
