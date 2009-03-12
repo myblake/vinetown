@@ -7,10 +7,12 @@
 <%= @post.body%>
 <% if @comment %>
 <h4>Comments</h4>
-	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div><br /><br />
-	<div class="commenttext">
-	<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
-	</div>
+	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div>
+	<% unless @comments["0"].empty? %>
+		<div class="commenttext">
+			<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
+		</div>
+	<% end %>
 <% end %>
 </div>
 
