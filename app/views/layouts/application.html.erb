@@ -48,7 +48,7 @@
 				<div id="mainwrapper">
 					<div id="login_box">
 	                    <% if session[:user_id] %>
-							<span class="commenttext">Signed in as <%= session[:user_email] %> <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span>
+							<span class="commenttext">Signed in as <%= session[:user_email] %> <span class="sp"><%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span></span>
 						<% end %><br />
 						<%= if pending 
 							link_to "Pending friend request", :controller => :friends, :action => :index
@@ -61,7 +61,7 @@
 		            </div>
 	            </div>
 	            <div id="footer"><br />
-	                Enjoy
+	                <span class="commenttext">Enjoy | &copy; 2009 Carol Yelverton | <%= link_to "Privacy Policy", :controller => :home, :action => :privacy %> | <%= link_to "Terms of Service", :controller => :home, :action => :terms %><span>
 	            </div>
             </div>
         </div>

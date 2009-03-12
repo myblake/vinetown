@@ -44,7 +44,7 @@ class GroupsController < ApplicationController
   
   def view
     @group = Group.find(params[:id])
-    @posts = Post.find(:all, :conditions => ["group_id=?", params[:id]])
+    @posts = Post.find(:all, :conditions => ["group_id=?", params[:id]], :order => "created_at DESC")
     @user = GroupsUsers.find(:first, :conditions => ["user_id=? and group_id=?",session[:user_id], @group.id])
     if @user
       @member = true

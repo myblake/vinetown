@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         redirect_to :action => :password_reset
         return
       end
-      redirect_to :controller => :users, :action => :index
+      redirect_to :controller => :home, :action => :index
 		else
 			unless email=~/.*\@.*\..*/
   			flash[:notice] = "Incorrect email or password. Your email address appears misformatted."
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 		session[:user_id] = nil
 		session[:user_email] = nil
 		flash[:notice] = "You are now logged out."
-		redirect_to :controller => :users, :action => :index
+		redirect_to :controller => :home, :action => :index
 	end
 	
   def index
@@ -172,7 +172,7 @@ class UsersController < ApplicationController
   	  @user.pw_reset = false
   	  if @user.save
         flash[:notice] = "Your settings are updated!"
-        redirect_to :controller => :users, :action => :index
+        redirect_to :controller => :home, :action => :index
       else
         flash[:notice] = "Error saving new settings."
       end

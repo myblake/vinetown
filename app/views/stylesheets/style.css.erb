@@ -22,7 +22,13 @@ h1, h2, h3, h4, h5, h6 {
 	/*font-family:"Georgia", serif;*/
 }
 
+h2 {
+	color:<%=@color["plum"]%>;
+}
 
+hr {
+	color:<%=@color["plum"]%>;
+}
 
 div {
 	margin:0px;
@@ -180,6 +186,8 @@ td {padding:2px 2px 2px 10px;}
 .borderleft{background-image:url("../images/left_border.png");float:left;width:100px;height:500px;position:absolute;top:0;left:0;}
 .borderright{background-image:url("../images/right_border.png");float:right;width:100px;height:500px;position:absolute;top:0;right:0;}
 .ztable {width: 100%;}
+.sp a{color:<%= @color["plum"] %>;}
+.sp a:hover{color:<%= @color["darkgreen"] %>;}
 /* spiffy css corners www.spiffycorners.com*/
 
 .spiffy{display:block}
