@@ -3,7 +3,8 @@ search for users - done
 add martial status, disambiguate from regular status
 friend interface => better way to add friends, control who sees your profile etc.
 ajax status bar stuff
-
+ajax comments
+use fucking jquery
 
 build out:
 structure for where posts go

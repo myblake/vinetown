@@ -5,17 +5,14 @@
 		<td class="home">
 			<% if !@news.nil? %>
 			<h2>News</h2>
-				<% #this is a terrible hack, though hopefully just changes references after the first time. still change it.
-				 @tmp = @posts 
-				@posts = @news %>
-				<%= render :partial => "partials/poster.html.erb" %>
+
+				<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @news } %>
 			<% end %>
 		</td>
 		<td class="home">
 			<% if !@posts.nil? %>			
 			<h2>User Posts</h2>
-				<% @posts = @tmp %>
-				<%= render :partial => "partials/poster.html.erb" %>
+				<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @posts }  %>
 			<% end %>
 		</td>
 	</tr>

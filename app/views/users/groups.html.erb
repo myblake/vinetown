@@ -1,0 +1,10 @@
+<% @count=0%>
+<h1>My Groups</h1>
+<div class="box"><%= link_to "New Group", :action => :new %><%= link_to "View All Groups", :controller => :groups %></div>
+<div class="colorback">
+<table style="width:100%">
+<% for group in @groups %>
+<% @count+=1 %><% if @count%2 == 0 %><tr><% else %><tr class="zebra"><% end %><td><%= link_to group.name, :action => :view, :params => {:id => group.id}%></td></tr>
+<% end %>
+</table>
+</div>

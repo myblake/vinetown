@@ -161,6 +161,14 @@ class UsersController < ApplicationController
     
   end
   
+  def index
+    @groups = Group.find(:all)
+  end
+  
+  def groups
+    @groups = User.find(session[:user_id]).groups
+  end
+  
   def password_reset
     @user = User.find(session[:user_id])
     if params[:user]

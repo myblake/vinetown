@@ -1,12 +1,13 @@
 <h1><%= @post.name%></h1>
+Posted by <%= @post.user.username %><br />
+<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 <div class="colorback">
 <% if @edit %>
 <div class="box"><%=link_to "Edit", :action => :edit, :params => {:id => @post.id} %></div><br />
 <% end %>
-<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 <%= @post.body%>
 <% if @comment %>
-<h4>Comments</h4>
+	<h4>Comments</h4>
 	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div>
 	<% unless @comments["0"].empty? %>
 		<div class="commenttext">

@@ -2,7 +2,6 @@
 <div class="colorback">
 <table class="formtable">
 <% form_for :post, @post do |f| %>
-
 	<tr><td><%= f.error_messages %></td></tr>
 	<tr>
 		<td>
@@ -39,9 +38,7 @@
 			<%= select(:post, :group_id, @groups) %>
 		</td>
 	</tr>
-
 	<tr><td><div class="box"><%= f.submit "Submit" %></div><br /></td></tr>
-	
 <% end %>
 </table>
 </div>

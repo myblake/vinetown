@@ -49,13 +49,19 @@
 					<div id="login_box">
 	                    <% if session[:user_id] %>
 							<span class="commenttext">Signed in as <%= session[:user_email] %> <span class="sp"><%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;</span></span>
-						<% end %><br />
-						<%= if pending 
-							link_to "Pending friend request", :controller => :friends, :action => :index
-						   end %>
-	                </div>
+							<% form_for :search, @search, :url => "/users/search" do |f| %>
+								<%= f.text_field :query, :style => "width:135px;" %>
+								<%= f.submit "Find People" %>
+							<% end %>
+							<%= if pending 
+								link_to "Pending friend request", :controller => :friends, :action => :index
+							   end %>
+						<% end %>
+	                </div><br />					
 		            <div id="main">
-		                <% if flash[:notice] %><div class="flash"><%= flash[:notice] %></div><br /><% end %>
+		                <% if flash[:notice] %><div class="clearer"></div>
+							<div class="flash"><%= flash[:notice] %></div><br />
+						<% end %>
 						<% if @mb_errors %><p class="flash notice"><%= @mb_errors%></p><br /><% end %>
 		                <%= yield %>
 		            </div>

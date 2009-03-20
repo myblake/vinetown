@@ -1,7 +1,23 @@
 <h1>Vinetown Community</h1>
 <% if !@posts.nil? %>	
 	<div class="colorback">		
-		<h2>Community News</h2>
-		<%= render :partial => "partials/poster.html.erb" %>
+		<table>
+			<tr>
+				<td class="home">
+					<% if !@posts.nil? %>
+					<h2>Community News</h2>
+						<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @posts } %>
+					<% end %>
+				</td>
+				<td class="home">
+					<% if !@posts.nil? %>			
+					<h2>Groups</h2>
+						<%= render :partial => "partials/poster.html.erb", :locals => { :posts => [] } %>
+					<% end %>
+				</td>
+			</tr>
+		</table>
 	</div>
 <% end %>
+
+
