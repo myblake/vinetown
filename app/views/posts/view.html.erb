@@ -7,9 +7,9 @@ Posted by <%= @post.user.username %><br />
 <% end %>
 <%= @post.body%>
 <% if @comment %>
-	<h4>Comments</h4>
 	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div>
 	<% unless @comments["0"].empty? %>
+		<h4>Comments</h4>
 		<div class="commenttext">
 			<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
 		</div>

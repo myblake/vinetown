@@ -1,17 +1,9 @@
+<% @nb = "nb" %>
 <h1 style="margin-bottom:2px">My Neighborhood - <%= h @user.username %></h1>
-<% form_for :user, @user do |f| %>
+<% form_for :status, @status do |f| %>
 	What are you up to? <%= f.text_field :status %><span class="box">&nbsp;<%= f.submit "Update"%></span>
 <% end %>
 <br />
-<div id="subnav" class="nav bar">
-	<ul>
-		<li><%= link_to("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
-		<li><%= link_to("My Friends", :controller => :friends, :action => :index)%></li>                    
-		<li><%= link_to("Messages", :controller => :messages, :action => :inbox)%></li>
-		<li><%= link_to "My Groups", :controller => :groups, :action => :index %>
-		<li><%= link_to "Posts", :controller => :posts, :action => :index %>
-	</ul>
-</div>
 <div class="colorback">
 <h2>Posts from friends</h2>
 	<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @posts } %>

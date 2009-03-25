@@ -84,14 +84,14 @@ class UsersController < ApplicationController
       flash[:notice] = "Couldn't not find user"
       redirect_to :action => :index
     end
+    @status = Status.find(:last, :conditions => ["user_id=?", params[:id]])
     @friends = Friend.find(:first, :conditions => ["(user_id_1=? and user_id_2=?) or (user_id_1=? and user_id_2=?)", session[:user_id], @user.id, @user.id, session[:user_id]])
   end
 
   def edit_profile
     @user = User.find(session[:user_id])
     if params[:user_status]
-      @user.status = params[:user_status][:status]
-      @user.save
+      Status.new(:status => params[:user][:status], :user_id => session[:user_id]).save
     end
     if params[:user]
       @user.first_name = params[:user][:first_name]

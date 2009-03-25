@@ -1,5 +1,6 @@
-<% if @user.status %><h1 style="margin-bottom:0px"><%= @user.first_name + " " + @user.last_name %></h1>
-	<span class="status"><%=h( @user.status )%></span><br /><br />
+<% @nb = "nb" %>
+<% if @status %><h1 style="margin-bottom:0px"><%= @user.first_name + " " + @user.last_name %></h1>
+	<span class="status"><%=h( @status.status )%></span><br /><br />
 <% else %>
 	<h1 style="margin-bottom:20px"><%= @user.first_name + " " + @user.last_name %></h1>
 <% end %>

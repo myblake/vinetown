@@ -15,3 +15,16 @@ layer home/community/neighborhood
 
 later:
 ajax comments
+
+New (as of 3.25.09)
+Right now:
+Comments => Single table inheritance
+Modalize them?
+Wine Diary (just a front end to a post)
+
+Ajax - comments, status. Use jquery
+Pull in posts posted to groups user in member of.
+
+
+Down the road
+Full security audit and db optimizations
