@@ -1,0 +1,13 @@
+<div class="hidden">
+<table>
+	<% form_for :comment, :url => { :controller => :posts, :action => :comment, :params => { :post => { :id => @post.id }}} do |f| %>
+	<tr>
+		<td>
+			Comment<br />
+			<span class="commentbox"<%= f.text_area :text %>
+		</td>
+	</tr>
+	<tr><td><%= f.submit "Submit" %><br /></td></tr>
+<% end %>
+</table>
+</div>

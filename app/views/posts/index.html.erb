@@ -1,7 +1,7 @@
 <% @nb = "nb" %>
 <% @count = 0 %>
 <h1>Posts</h1>
-<div class="box"><%=link_to "Write a New Post", :action => :new %></div>
+<div class="box"><%=link_to "Write a New Post", :action => :new %><%=link_to "Write in my wine diary", :action => :diary %></div>
 <% if !@posts.empty?%>
 <div class="colorback">
 <table style="width:100%;">

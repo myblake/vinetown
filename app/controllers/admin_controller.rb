@@ -19,6 +19,15 @@ class AdminController < ApplicationController
       @user.save
     end
   end
+
+  def update_comments
+    comments = Comment.find(:all)
+    for comment in comments
+      comment.foreign_id = comment.post_id
+      comment.type = "Post"    
+      comment.save
+    end
+  end
   
   protected
   def authorize 

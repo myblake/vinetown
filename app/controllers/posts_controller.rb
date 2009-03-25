@@ -81,6 +81,30 @@ class PostsController < ApplicationController
       end
     end
   end
+  
+  def diary
+    @groupusers = GroupsUsers.find(:all, :conditions => ["user_id=?", session[:user_id]])    
+    @groups = {}
+    for group_id in @groupusers
+      group = Group.find(:first, :conditions => ["id=?", group_id.group_id])
+      @groups[group.name] = group.id
+    end
+    if params[:diary]
+      #diary has the params => who    what    when    where    with    thoughts
+      @post = Post.new( :user_id => session[:user_id],
+                        :name => "#{params[:diary][:what]} #{params[:diary][:when]}", 
+                        :body => "Wine: #{params[:diary][:what]}\n\nWhen: #{params[:diary][:when]}\n\nWhere: #{params[:diary][:where]}\n\nWith: #{params[:diary][:who]}\n\nPaired with: #{params[:diary][:with]}\n\nAdditional thoughts: #{params[:diary][:thoughts]}",
+                        :news => 0,
+                        :home_page => params[:diary][:home_page],
+                        :community_page => params[:diary][:community_page],
+                        :group_id => params[:post][:group_id])
+      unless @post.save
+        flash[:error] = "Could not save post"
+        return
+      end
+      redirect_to :action => :view, :params => { :id => @post.id }
+    end
+  end
 
   def view
     @post = Post.find(params[:id])
@@ -92,7 +116,7 @@ class PostsController < ApplicationController
     @comments = {}
     if session[:user_id]
       @edit = (@post.user.id == session[:user_id])
-      @comment = true
+      @show_comment = true
     else 
       @edit = false
       return

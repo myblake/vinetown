@@ -1,0 +1,61 @@
+<h1>New Diary Entry</h1>
+<div class="colorback">
+<table class="formtable">
+<% form_for :diary do |f| %>
+	<tr><td><%= f.error_messages %></td></tr>
+	<tr>
+		<td>
+			Wine<br />
+			<%= f.text_field :what %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			When<br />
+			<%= f.text_field :when %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Where<br />
+			<%= f.text_field :where %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			With who<br />
+			<%= f.text_field :who %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			With what<br />
+			<%= f.text_field :with %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Thoughts<br />
+			<%= f.text_area :thoughts %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.check_box :home_page %>Submit to Home Page
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.check_box :community_page %>Submit to Community Page
+		</td>
+	</tr>
+	<tr>
+		<td>			
+			<%= f.check_box :group %>Post to Group<br />
+			<%= select(:post, :group_id, @groups) %>
+		</td>
+	</tr>
+	<tr><td><div class="box"><%= f.submit "Submit" %></div><br /></td></tr>
+<% end %>
+</table>
+</div>

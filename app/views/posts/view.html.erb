@@ -1,4 +1,4 @@
-<h1><%= @post.name%></h1>
+<h5><%= @post.name%></h5>
 Posted by <%= @post.user.username %><br />
 <span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 <div class="colorback">
@@ -6,7 +6,7 @@ Posted by <%= @post.user.username %><br />
 <div class="box"><%=link_to "Edit", :action => :edit, :params => {:id => @post.id} %></div><br />
 <% end %>
 <%= @post.body%>
-<% if @comment %>
+<% if @show_comment %>
 	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div>
 	<% unless @comments["0"].empty? %>
 		<h4>Comments</h4>

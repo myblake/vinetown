@@ -5,6 +5,15 @@
 <% end %>
 <br />
 <div class="colorback">
+<!-- clearly needs to be better formated -->
+<h2>Status Updates from friends</h2>
+<% for status in @statuses %>
+	<h3><%= link_to status.user.username, :controller => :users, :action => :profile, :params => { :id => status.user_id } %></h3>
+	<span class="timetext"><%= status.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
+	<%= status.status %>
+<hr />
+<% end %>
+
 <h2>Posts from friends</h2>
 	<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @posts } %>
 </div>
