@@ -61,7 +61,10 @@ class PostsController < ApplicationController
 
   def comment
     if params[:post]
-      @post_id = params[:post][:id]
+      @foreign_id = params[:post][:id]      
+    end
+    if params[:status]
+      @foreign_id = params[:status][:id]
     end
     if params[:comment] && params[:comment][:text]
       if params[:parent]
@@ -69,12 +72,23 @@ class PostsController < ApplicationController
       else
         parent = 0
       end
-      @comment = Comment.new(:user_id => session[:user_id], :text => params[:comment][:text], :parent_id => parent, :post_id => params[:post][:id] )
+      @comment = Comment.new(:user_id => session[:user_id], :text => params[:comment][:text], :parent_id => parent, :foreign_id => @foreign_id)
+      if params[:post]      
+        @comment.type = "Post"
+      end
+      if params[:status]
+        @comment.type = "Status"
+      end  
       unless @comment.save
         flash[:error] = "Could not save comment"
         return
       end
-      redirect_to :action => :view, :params => { :id => @post_id }
+      if params[:post]
+        redirect_to :action => :view, :params => { :id => @foreign_id }
+      end
+      if params[:status]
+        redirect_to :controller => :home, :action => :neighborhood
+      end
     else
       if params[:comment] && params[:comment][:parent]
         @parent_id = params[:comment][:parent]  
@@ -106,14 +120,17 @@ class PostsController < ApplicationController
     end
   end
 
+  # view for a post
+  # has to build the object for nested comments
   def view
     @post = Post.find(params[:id])
+    # sanitizes html
     @post.name = @post.name.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
     if @post.body
+      # sanitizes html and reformats newlines into html line breaks
       @post.body = @post.body.gsub(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/, "")
       @post.body = @post.body.gsub("\n", "<br />")
     end
-    @comments = {}
     if session[:user_id]
       @edit = (@post.user.id == session[:user_id])
       @show_comment = true
@@ -121,14 +138,17 @@ class PostsController < ApplicationController
       @edit = false
       return
     end
-    @comments_array = Comment.find(:all, :conditions => ["post_id=?", params[:id]], :order => "id ASC")
+    
+    # pull all comments and then create nested arrays using the id of the parent comment as the array index
+    @comments_array = Comment.find(:all, :conditions => ["type=\"Post\" and foreign_id=?", params[:id]], :order => "id ASC")
+    @comments = {}
     @comments["0"] = []
     for comment in @comments_array
-      if comment.parent_id == 0
+      if comment.parent_id.to_i == 0
         @comments["0"].push(comment)
         @comments[comment.id] = Array.new
       else
-        @comments[comment.parent_id].push(comment)
+        @comments[comment.parent_id.to_i].push(comment)
         @comments[comment.id] = Array.new
       end
     end

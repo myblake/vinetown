@@ -1,10 +1,45 @@
 <% unless @comments.empty? %>
 	<% for comment in @comments[object] %>
+
 		<%=comment.user.first_name + " " + comment.user.last_name%><br /></span>
-		<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %><br />
-		<%= link_to "Reply", :action => :comment, :params => { :post => { :id => @post.id }, :comment => {:parent => comment.id }}%>
+		<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %><br />	
+		<%# may want this for ajaxing stuff later <%= link_to "Reply", :action => :comment, :params => { :post => { :id => @post.id }, :comment => {:parent => comment.id }}%>
+		<div class="reply<%= comment.id %>"><a href="javascript:return 0;">Reply</a></div>
+		
+		<%
+		# generates jquery callback functions for show/hide functionality
+		# note: doesn't scale great, ajax here would be good
+		 @js += "$('.reply#{comment.id} a').click(function() {
+			$('.reply#{comment.id}').addClass('hidden');
+			$('#reply#{comment.id}').removeClass('hidden');
+		});
+
+		$('.hide#{comment.id}').click(function() {
+			$('.reply#{comment.id}').removeClass('hidden');
+			$('#reply#{comment.id}').addClass('hidden');
+		});" %>
+
+		<div id="reply<%= comment.id %>" class="hidden">
+		<div class='box'><a href="javascript:return 0;" class="hide<%= comment.id %>">Hide</a></div>
+		<% # generates a form to reply to the given comment, see note about scaling above %>
+		<table>
+			<% form_for :comment, :url => { :controller => :posts, :action => :comment, :params => { :post => { :id => @post.id }, :parent => comment.id }} do |f| %>		
+			<tr>
+				<td>
+					Comment<br />
+					<span class="commentbox"><%= f.text_area :text %></span>
+				</td>
+			</tr>
+			<tr><td><%= f.submit "Submit" %><br /></td></tr>
+		<% end %>
+		</table>
+		</div>
+		
 		</span><br />	
 		<div class="commentdiv"><span class="comment"><%= h comment.text %></span></div> <br />
-		<div class="indent"><%= render (:partial => "partials/comment.html.erb", :object => comment.id )%></div>
+		<%# recursive call to self passing in own id as the root node for the comment object%>
+		<div class="indent"><%= render(:partial => "partials/comment.html.erb", :object => comment.id )%></div>
+
 	<% end %>
 <% end %>
+

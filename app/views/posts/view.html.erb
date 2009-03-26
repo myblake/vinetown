@@ -1,3 +1,5 @@
+<% @js = "" %>
+
 <h5><%= @post.name%></h5>
 Posted by <%= @post.user.username %><br />
 <span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
@@ -7,7 +9,23 @@ Posted by <%= @post.user.username %><br />
 <% end %>
 <%= @post.body%>
 <% if @show_comment %>
-	<div class="box"><%= link_to "Add Comment", :action => :comment, :params => { :post => { :id => @post.id }}%></div>
+	<div class="box add_comment"><a href="javascript:return 0;">Add Comment</a></div>
+	
+	<div id="thecomment" class="hidden">
+	<div class='box'><a href="javascript:return 0;" class="hide">Hide</a></div>
+	<table>
+		<% form_for :comment, :url => { :controller => :posts, :action => :comment, :params => { :post => { :id => @post.id }}} do |f| %>		
+		<tr>
+			<td>
+				Comment<br />
+				<span class="commentbox"><%= f.text_area :text %></span>
+			</td>
+		</tr>
+		<tr><td><%= f.submit "Submit" %><br /></td></tr>
+	<% end %>
+	</table>
+	</div>
+	
 	<% unless @comments["0"].empty? %>
 		<h4>Comments</h4>
 		<div class="commenttext">
@@ -17,3 +35,18 @@ Posted by <%= @post.user.username %><br />
 <% end %>
 </div>
 
+<script type="text/javascript">
+ 	$(function() {
+		$(".add_comment a").click(function() {
+			$(".add_comment").addClass("hidden");
+			$("#thecomment").removeClass("hidden");
+		});
+		
+		$(".hide").click(function() {
+			$(".add_comment").removeClass("hidden");
+			$("#thecomment").addClass("hidden");
+		});
+		
+		<%= @js %>
+	});
+</script>

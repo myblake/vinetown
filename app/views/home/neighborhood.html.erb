@@ -1,4 +1,5 @@
 <% @nb = "nb" %>
+<% @js = "" %>
 <h1 style="margin-bottom:2px">My Neighborhood - <%= h @user.username %></h1>
 <% form_for :status, @status do |f| %>
 	What are you up to? <%= f.text_field :status %><span class="box">&nbsp;<%= f.submit "Update"%></span>
@@ -9,11 +10,62 @@
 <h2>Status Updates from friends</h2>
 <% for status in @statuses %>
 	<h3><%= link_to status.user.username, :controller => :users, :action => :profile, :params => { :id => status.user_id } %></h3>
-	<span class="timetext"><%= status.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
+	<span class="timetext"><%= status.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span>
+	<br /><br />
 	<%= status.status %>
-<hr />
+	<div class="add_comment" style="font-size:small;"><a href="javascript:return 0;">comment</a></div>
+
+	<!-- js for comment show/hide -->
+	<% @js += "
+		$('.add_comment a').click(function() {
+			$('.add_comment').addClass('hidden');
+			$('#thecomment').removeClass('hidden');
+		});
+
+		$('.hide').click(function() {
+			$('.add_comment').removeClass('hidden');
+			$('#thecomment').addClass('hidden');
+		});
+	"
+	%>
+
+	<!-- form for comment -->
+	<div id="thecomment" class="hidden">
+	<div class='box'><a href="javascript:return 0;" class="hide">Hide</a></div>
+	<table>
+		<% form_for :comment, :url => { :controller => :posts, :action => :comment, :params => { :status => { :id => status.id }}} do |f| %>		
+		<tr>
+			<td>
+				Comment<br />
+				<span class="commentbox"><%= f.text_area :text %></span>
+			</td>
+		</tr>
+		<tr><td><%= f.submit "Submit" %><br /></td></tr>
+	<% end %>
+	</table>
+	</div>
+
+	<!-- replies -->
+	<% if  @comments[status.id] %>
+	<h3>Friends Replies</h3>
+	<% end %>
+	<% for comment in @comments[status.id] %>
+		<%=comment.user.username%> said<br /></span>
+		<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
+		<div class="commentdiv"><span class="comment"><%= h comment.text %></span></div> <br />
+	<% end %>
+	
+	<hr />
 <% end %>
+
+
 
 <h2>Posts from friends</h2>
 	<%= render :partial => "partials/poster.html.erb", :locals => { :posts => @posts } %>
 </div>
+
+<script type="text/javascript">
+ 	$(function() {
+		<%= @js %>
+	});
+</script>

@@ -8,6 +8,9 @@ class HomeController < ApplicationController
     end
   end
   
+  #
+  # Will also need to show friends comments on these things.
+  #
   def neighborhood
     @user = User.find(session[:user_id])
     if params[:status]
@@ -18,6 +21,13 @@ class HomeController < ApplicationController
     end
     @posts = Post.find(:all, :conditions => ["user_id in (select user_id_1 from friends where user_id_2=#{session[:user_id]} and accepted=1) or user_id in (select user_id_2 from friends where user_id_1=#{session[:user_id]} and accepted=1)"], :order => "created_at DESC")
     @statuses = Status.find(:all, :conditions => ["user_id in (select user_id_1 from friends where user_id_2=#{session[:user_id]} and accepted=1) or user_id in (select user_id_2 from friends where user_id_1=#{session[:user_id]} and accepted=1)"], :order => "created_at DESC")
+    @comments = []
+    for status in @statuses
+      @mycomments = Comment.find(:all, :conditions => ["type=\"Status\" and foreign_id=?", status.id], :order => "id ASC")
+      @comments[status.id] = @mycomments
+    end
+
+    # pull all comments and then create nested arrays using the id of the parent comment as the array index
   end
   
   def index
