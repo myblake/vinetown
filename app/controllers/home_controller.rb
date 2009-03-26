@@ -20,7 +20,7 @@ class HomeController < ApplicationController
       @status = Status.find(:last, :conditions => ["user_id=?", session[:user_id]])
     end
     @posts = Post.find(:all, :conditions => ["user_id in (select user_id_1 from friends where user_id_2=#{session[:user_id]} and accepted=1) or user_id in (select user_id_2 from friends where user_id_1=#{session[:user_id]} and accepted=1)"], :order => "created_at DESC")
-    @statuses = Status.find(:all, :conditions => ["user_id in (select user_id_1 from friends where user_id_2=#{session[:user_id]} and accepted=1) or user_id in (select user_id_2 from friends where user_id_1=#{session[:user_id]} and accepted=1)"], :order => "created_at DESC")
+    @statuses = Status.find(:all, :conditions => ["user_id in (select user_id_1 from friends where user_id_2=#{session[:user_id]} and accepted=1) or user_id in (select user_id_2 from friends where user_id_1=#{session[:user_id]} and accepted=1) or user_id=?", session[:user_id]], :order => "created_at DESC")
     @comments = []
     for status in @statuses
       @mycomments = Comment.find(:all, :conditions => ["type=\"Status\" and foreign_id=?", status.id], :order => "id ASC")
