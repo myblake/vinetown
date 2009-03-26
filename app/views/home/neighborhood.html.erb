@@ -2,7 +2,7 @@
 <% @js = "" %>
 <h1 style="margin-bottom:2px">My Neighborhood - <%= h @user.username %></h1>
 <% form_for :status, @status do |f| %>
-	What are you up to? <%= f.text_field :status %><span class="box">&nbsp;<%= f.submit "Update"%></span>
+	What are you up to? <span class="status"><%= f.text_field :status %></span><span class="box">&nbsp;<%= f.submit "Update"%></span>
 <% end %>
 <br />
 <div class="colorback">

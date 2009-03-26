@@ -91,7 +91,10 @@ class UsersController < ApplicationController
   def edit_profile
     @user = User.find(session[:user_id])
     if params[:user_status]
-      Status.new(:status => params[:user][:status], :user_id => session[:user_id]).save
+      @status = Status.new(:status => params[:user_status][:status], :user_id => session[:user_id])
+      @status.save
+    else
+      @status = Status.find(:last, :conditions => ["user_id=?", session[:user_id]])  
     end
     if params[:user]
       @user.first_name = params[:user][:first_name]
@@ -117,8 +120,10 @@ class UsersController < ApplicationController
   def edit_profile_2
     @user = User.find(session[:user_id])
     if params[:user_status]
-      @user.status = params[:user_status][:status]
-      @user.save
+      @status = Status.new(:status => params[:user_status][:status], :user_id => session[:user_id])
+      @status.save
+    else
+      @status = Status.find(:last, :conditions => ["user_id=?", session[:user_id]])  
     end
     if params[:user]      
       dob = Time.parse(params[:user][:date_of_birth])

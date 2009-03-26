@@ -30,6 +30,10 @@ class HomeController < ApplicationController
     # pull all comments and then create nested arrays using the id of the parent comment as the array index
   end
   
+  def mygroups
+    @groups = User.find(session[:user_id]).groups
+  end
+  
   def index
     #pull in posts
     @posts = Post.find(:all, :conditions => ["home_page = 1"], :order => "created_at DESC")

@@ -29,8 +29,8 @@
 						<ul>
 							<% if session[:user_id] %>                        
 							<li><%= link_to "Vinetown Home", :controller => :home, :action => :index %>
-							<li><%= link_to "My Community", :controller => :home, :action => :community %>
 							<li class="<%= @nb %>"><%= link_to "My Neighborhood", :controller => :home, :action => :neighborhood %>
+							<li><%= link_to "Groups", :controller => :groups, :action => :index %>
 							<% else %>
 							<li><%= link_to "Login", :controller => :users, :action => :login %>
 							<li><%= link_to "Sign Up", :controller => :users, :action => :signup %>									
@@ -50,7 +50,7 @@
 							<li><%= link_to("My Profile", :controller => :users, :action => :profile, :params => { :id => session[:user_id]})%></li>                        
 							<li><%= link_to("My Friends", :controller => :friends, :action => :index)%></li>                    
 							<li><%= link_to("Messages", :controller => :messages, :action => :inbox)%></li>
-							<li><%= link_to "My Groups", :controller => :groups, :action => :index %>
+							<li><%= link_to "My Groups", :controller => :home, :action => :mygroups %>
 							<li><%= link_to "Posts", :controller => :posts, :action => :index %>
 						</ul>
 					</div>
