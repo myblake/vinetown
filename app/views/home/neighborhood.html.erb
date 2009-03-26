@@ -13,25 +13,25 @@
 	<span class="timetext"><%= status.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span>
 	<br /><br />
 	<%= status.status %>
-	<div class="add_comment" style="font-size:small;"><a href="javascript:return 0;">comment</a></div>
+	<div class="add_comment<%= status.id%>" style="font-size:small;"><a href="javascript:return 0;">comment</a></div>
 
 	<!-- js for comment show/hide -->
 	<% @js += "
-		$('.add_comment a').click(function() {
-			$('.add_comment').addClass('hidden');
-			$('#thecomment').removeClass('hidden');
+		$('.add_comment#{status.id} a').click(function() {
+			$('.add_comment#{status.id}').addClass('hidden');
+			$('#thecomment#{status.id}').removeClass('hidden');
 		});
 
-		$('.hide').click(function() {
-			$('.add_comment').removeClass('hidden');
-			$('#thecomment').addClass('hidden');
+		$('.hide#{status.id}').click(function() {
+			$('.add_comment#{status.id}').removeClass('hidden');
+			$('#thecomment#{status.id}').addClass('hidden');
 		});
 	"
 	%>
 
 	<!-- form for comment -->
-	<div id="thecomment" class="hidden">
-	<div class='box'><a href="javascript:return 0;" class="hide">Hide</a></div>
+	<div id="thecomment<%= status.id%>" class="hidden">
+	<div class='box'><a href="javascript:return 0;" class="hide<%= status.id%>">Hide</a></div>
 	<table>
 		<% form_for :comment, :url => { :controller => :posts, :action => :comment, :params => { :status => { :id => status.id }}} do |f| %>		
 		<tr>
