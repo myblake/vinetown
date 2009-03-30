@@ -14,6 +14,8 @@
 #@color["plum"] = "#703545"
 @color["plum"] = "#731841"
 @border_size = 5
+
+@font_size = "15px"
 %>
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,7 +33,7 @@ h4 {
 }
 
 h3 {
-	margin-bottom:5px;
+	margin:5px 0 5px 0;
 }
 
 h1 { color: <%=@color["darkgreen"]%>;border-bottom:3px <%= @color["plum"] %> solid; padding-bottom:10px; }
@@ -49,14 +51,14 @@ div {
 
 body { background-color: <%=@color["champagne"]%>; background-image: url(../images/Grapes_during_pigmentation.jpg) no-repeat;
 	font-family: arial, helvetica, sans-serif;
-	font-size:   18px;
-	line-height: 18px;
+	font-size: <%= @font_size %>;
+	line-height: <%= @font_size %>;
 	
 }
 
 input, textarea {
 	font-family: arial, helvetica, sans-serif;
-	font-size:   18px;
+	font-size: <%= @font_size %>;
 	border: 1px <%= @color["plum"] %> solid ;
 	background: <%= @color["champagne"] %> ;
 
@@ -68,8 +70,8 @@ textarea {
 
 p, ol, ul, td {
   font-family: arial, helvetica, sans-serif;
-  font-size:   18px;
-  line-height: 18px;
+  font-size: <%= @font_size %>;
+  line-height: <%= @font_size %>;
 }
 
 pre {
@@ -167,7 +169,7 @@ td {padding:2px 2px 2px 10px;}
 /* Classes */
 .nb a {background-color:<%= @color["darkgreen"] %>; }
 .neighborhood { border-right: 5px <%= @color["darkgreen"] %> solid; border-left: 5px <%= @color["darkgreen"] %> solid; border-bottom: 0px <%= @color["darkgreen"] %> solid ;}
-.colorback {background-color:<%= @color["gray"] %>; padding:15px;border:3px <%= @color["darkgreen"] %> solid;}
+.colorback {background-color:<%= @color["gray"] %>; padding:8px 8px 8px 8px;border:3px <%= @color["darkgreen"] %> solid;}
 .teal {}
 .chart{padding:3px;border:3px <%= @color["black"] %> solid; background:white;float:left;width:612px;margin-right:8px;}
 .clearer{clear:both;}
@@ -181,16 +183,18 @@ td {padding:2px 2px 2px 10px;}
 .hundredpx {height:100px;}
 .highlight{color:<%=@color["newgreen"]%>;font-family:"Palatino Linotype", "Book Antiqua", "Palatino", serif;font-weight:100;font-size:1.3em;}
 .headline{text-align:center;margin-top:0;color:<%=@color["darkgreen"]%>;}
-.timetext{font-size:10px;}
+
+.timetext{font-size:13px; color:<%= @color["newgreen"] %>;}
 .commenttext{font-size:13px;}
 .commentbox textarea {height:100px;}
-.comment{border:1px dotted white;background-color:<%=@color["champagne"]%>; padding:10px;}
-.commentdiv{padding:10px 0px 0px 0px}
+.comment {border:1px dotted white;background-color:<%=@color["champagne"]%>; width:500px;}
+.commentdiv{margin:3px 0px 3px 0px ;padding:5px;}
+
 .indent{margin-left:30px;}
 .flash {line-height:0px;background:<%=@color["gray"]%>;padding:20px;border:3px <%=@color["green"]%> solid ;}
 .box {margin-top:-20px;}
 .colorback .box {margin-top:0px;}
-.box a{padding:10px; background-color:<%= @color["champagne"] %>;margin:10px;line-height:4em;border:2px <%= @color["darkgreen"] %> solid;}
+.box a{padding:5px; background-color:<%= @color["champagne"] %>;margin:5px 0 5px 0;line-height:3em;border:2px <%= @color["darkgreen"] %> solid;}
 .box a:hover{border:2px <%= @color["plum"] %> solid; background-image:url(../images/stripe.png);background-repeat:repeat-x;}
 .box input{padding:2px; background-color:<%= @color["champagne"] %>;margin:0px;line-height:2em;border:2px <%= @color["darkgreen"] %> solid;}
 .status input{width:703px;} 
@@ -201,8 +205,8 @@ td {padding:2px 2px 2px 10px;}
 .hidden {display:none;}
 .sp a{color:<%= @color["plum"] %>;}
 .sp a:hover{color:<%= @color["darkgreen"] %>;}
-/* spiffy css corners www.spiffycorners.com*/
 
+/* spiffy css corners www.spiffycorners.com*/
 .spiffy{display:block}
 .spiffy *{
   display:block;

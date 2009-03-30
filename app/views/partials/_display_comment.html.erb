@@ -1,0 +1,7 @@
+<div class="commentdiv comment "><span class="commenttext">
+<div style="float:left;width:50px;height:45px;"><img src="/images/cup.png" style="width:45px;height:45px;" alt="profile picture" /></div>
+	<%= link_to comment.user.username, :controller => :users, :action => :profile, :params => { :id => comment.user.id } %> <span class="timetext">at <%= comment.created_at.strftime("%I:%M %p on %a %b %d") %></span><br />
+	<%= h comment.text %>
+</span>
+<div class="clearer"></div>
+</div>

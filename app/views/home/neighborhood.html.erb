@@ -4,8 +4,14 @@
 <% form_for :status, @status do |f| %>
 	What are you up to? <span class="status"><%= f.text_field :status %></span><span class="box">&nbsp;<%= f.submit "Update"%></span>
 <% end %>
-<br />
 <div class="colorback">
+<% if  @comments[@status.id] %>
+	<h3 style="margin-top:0px;">Friends Replies to your current status</h3>
+<% end %>
+<% for comment in @comments[@status.id] %>
+	<%= render :partial => "partials/display_comment.html.erb", :locals => { :comment => comment } %>		
+<% end %>
+
 <!-- clearly needs to be better formated -->
 <h2>Status Updates from friends</h2>
 <% for status in @statuses %>
@@ -13,7 +19,7 @@
 	<span class="timetext"><%= status.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span>
 	<br /><br />
 	<%= status.status %>
-	<div class="add_comment<%= status.id%>" style="font-size:small;"><a href="javascript:return 0;">comment</a></div>
+	<div class="add_comment<%= status.id%> box" style="font-size:small;"><a href="javascript:return 0;">Comment</a></div>
 
 	<!-- js for comment show/hide -->
 	<% @js += "
@@ -46,13 +52,11 @@
 	</div>
 
 	<!-- replies -->
-	<% if  @comments[status.id] %>
-	<h3>Friends Replies</h3>
+	<% if !@comments[status.id].empty? %>
+	<h3>Replies</h3>
 	<% end %>
 	<% for comment in @comments[status.id] %>
-		<%=comment.user.username%> said<br /></span>
-		<span class="timetext"><%= comment.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
-		<div class="commentdiv"><span class="comment"><%= h comment.text %></span></div> <br />
+		<%= render :partial => "partials/display_comment.html.erb", :locals => { :comment => comment } %>
 	<% end %>
 	
 	<hr />

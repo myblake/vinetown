@@ -53,6 +53,7 @@ class GroupsController < ApplicationController
         @admin = false
       end
     end
+    @comments = GroupComments.find(:all, :conditions => ["foreign_id=?", params[:id]])
   end
     
 end

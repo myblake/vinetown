@@ -1,16 +1,20 @@
 <% @js = "" %>
 
 <h5><%= @post.name%></h5>
-Posted by <%= @post.user.username %><br />
-<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
+
+Posted by <%= link_to @post.user.username, :controller => :users, :action => :profile, :params => { :id => @post.user.id } %><br />
+
+<span class="timetext"><%= @post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br />
 <div class="colorback">
 <% if @edit %>
-<div class="box"><%=link_to "Edit", :action => :edit, :params => {:id => @post.id} %></div><br />
+	<div class="box"><%=link_to "Edit", :action => :edit, :params => {:id => @post.id} %></div>
 <% end %>
 <%= @post.body%>
 <% if @show_comment %>
+	<% unless @comments["0"].empty? %>
+		<h4 style="margin-bottom:0px;">Comments</h4>
+	<% end %>
 	<div class="box add_comment"><a href="javascript:return 0;">Add Comment</a></div>
-	
 	<div id="thecomment" class="hidden">
 	<div class='box'><a href="javascript:return 0;" class="hide">Hide</a></div>
 	<table>
@@ -27,7 +31,6 @@ Posted by <%= @post.user.username %><br />
 	</div>
 	
 	<% unless @comments["0"].empty? %>
-		<h4>Comments</h4>
 		<div class="commenttext">
 			<%= render (:partial => "partials/comment.html.erb", :object => "0" )%>
 		</div>

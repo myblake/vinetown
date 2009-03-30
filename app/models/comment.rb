@@ -13,6 +13,11 @@ class StatusComment < Comment
   belongs_to :status, :foreign_key => "foreign_id"
 end
 
+class GroupComment < Comment
+  belongs_to :group, :foreign_key => "foreign_id"
+end
+
+
 #
 # Makes this way easier down the road, and you know it's gonna happen. 
 #
