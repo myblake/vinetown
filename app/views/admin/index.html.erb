@@ -37,7 +37,7 @@
 <% else %>
   <tr class="zebra">
 <% end %>
-    <td><%= link_to h(user.email), :action => "edit", :params => { :id => user.id }   %></td>
+    <td><%= link_to h(user.username), :controller => :users, :action => :profile, :params => { :id => user.id }   %></td>
     <td><%=h user.first_name %></td>
     <td><%=h user.last_name %></td>
     <td><% if user.date_of_birth %><%=h user.date_of_birth.strftime("%m/%d/%Y") %><% end %></td>
