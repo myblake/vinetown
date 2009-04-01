@@ -1,6 +1,12 @@
 <% for post in posts %>
-	<h3><%= post.name%> -
-	<%= link_to post.user.username, :controller => :users, :action => :profile, :params => { :id => post.user_id } %></h3>
+	<h3><%= post.name%>
+	<%- if local_assigns[:show_author].nil? then
+	show_author = true end -%>
+
+
+	<% if show_author %> -
+	<%= link_to post.user.username, :controller => :users, :action => :profile, :params => { :id => post.user_id } %>
+	<% end %></h3>
 	<span class="timetext"><%= post.created_at.strftime("%I:%M %p on %a %b %d %Y") %></span><br /><br />
 	<% unless post.body.nil? %>
 		<%= post.body[0,200].chomp(" ") %><% if post.body.length > 200 %>...<% end %>

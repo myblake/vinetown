@@ -19,7 +19,6 @@ class PostsController < ApplicationController
                         :body => params[:post][:body],
                         :news => params[:post][:news],
                         :home_page => params[:post][:home_page],
-                        :community_page => params[:post][:community_page],
                         :group_id => params[:post][:group_id])
       unless @post.save
         flash[:error] = "Could not save post"
@@ -42,7 +41,6 @@ class PostsController < ApplicationController
       @post.body = params[:post][:body]
       @post.news = params[:post][:news]
       @post.home_page = params[:post][:home_page]
-      @post.community_page = params[:post][:community_page]
       if params[:post][:group] == '1'
         @post.group_id = params[:post][:group_id]
       else
@@ -110,7 +108,6 @@ class PostsController < ApplicationController
                         :body => "Wine: #{params[:diary][:what]}\n\nWhen: #{params[:diary][:when]}\n\nWhere: #{params[:diary][:where]}\n\nWith: #{params[:diary][:who]}\n\nPaired with: #{params[:diary][:with]}\n\nAdditional thoughts: #{params[:diary][:thoughts]}",
                         :news => 0,
                         :home_page => params[:diary][:home_page],
-                        :community_page => params[:diary][:community_page],
                         :group_id => params[:post][:group_id])
       unless @post.save
         flash[:error] = "Could not save post"
