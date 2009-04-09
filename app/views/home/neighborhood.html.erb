@@ -9,7 +9,7 @@
 	<h3 style="margin-top:0px;">Friends Replies to your current status</h3>
 <% end %>
 
-<% unless @comments.nil? %>
+<% unless @comments = {} %>
 	<% for comment in @comments[@status.id] %>
 		<%= render :partial => "partials/display_comment.html.erb", :locals => { :comment => comment } %>		
 	<% end %>
