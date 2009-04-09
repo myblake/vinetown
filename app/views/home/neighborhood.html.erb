@@ -8,8 +8,11 @@
 <% if  @comments[@status.id] %>
 	<h3 style="margin-top:0px;">Friends Replies to your current status</h3>
 <% end %>
-<% for comment in @comments[@status.id] %>
-	<%= render :partial => "partials/display_comment.html.erb", :locals => { :comment => comment } %>		
+
+<% unless @comments.nil? %>
+	<% for comment in @comments[@status.id] %>
+		<%= render :partial => "partials/display_comment.html.erb", :locals => { :comment => comment } %>		
+	<% end %>
 <% end %>
 
 <!-- clearly needs to be better formated -->
